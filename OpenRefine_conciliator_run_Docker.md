@@ -93,7 +93,7 @@ To clone the conciliator repository from GitHub, you can use the command line or
 
    Click on "Code" and then "Open with GitHub Desktop". Allow GitHub Desktop to be opened and select a place on your machine for the repository.
 
-   <img src="G:\My Drive\docu\dataManipulationNotes\img\clone_github_desktop.png" alt="illustrates cloning via GitHub using GitHub desktop" style="zoom: 67%;" align="left"/>
+   <img src="img\clone_github_desktop.png" alt="illustrates cloning via GitHub using GitHub desktop" style="zoom: 67%;" align="left"/>
 
 ### Build a Docker image
 
