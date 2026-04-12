@@ -93,7 +93,8 @@ To clone the conciliator repository from GitHub, you can use the command line or
 
    Click on "Code" and then "Open with GitHub Desktop". Allow GitHub Desktop to be opened and select a place on your machine for the repository.
 
-   <img src="img\clone_github_desktop.png" alt="illustrates cloning via GitHub using GitHub desktop" style="zoom: 67%;" align="left"/>
+   <img src="img\clone_github_desktop.png" alt="illustrates cloning via GitHub using GitHub desktop" width=40%></img>
+
 
 ### Build a Docker image
 
@@ -110,11 +111,11 @@ docker build -t conciliator .
 ```
 You'll see a lot of text running by in the command line, let it do its thing. This might take a couple of minutes. Once it's finished, you'll have an entry called "conciliator" in Docker Desktop "**Builds**":
 
-<img src="img\conciliator_docker_builds.png" alt="a screenshot of Docker Desktop showing available builds" style="zoom:67%;" align="left"/>
+<img src="img\conciliator_docker_builds.png" alt="a screenshot of Docker Desktop showing available builds" width=60%></img>
 
 Given the build worked fine, there is now also an entry in "**Images**" called "conciliator":
 
-<img src="img\conciliator_docker_images.png" alt="a screenshot of Docker Desktop showing available images" style="zoom: 67%;" align="left"/>
+<img src="img\conciliator_docker_images.png" alt="a screenshot of Docker Desktop showing available images" width=60%></img>
 
 ### Run the Docker image in a container[^4 ]
 
@@ -127,11 +128,11 @@ Expand the "Optional settings" and enter:
 
 Click "**Run**".
 
-<img src="img\conciliator_docker_container_settings" alt="a screenshot of the optional settings window with container name and port populated" style="zoom:67%;" align="left" />
+<img src="img\conciliator_docker_container_settings" alt="a screenshot of the optional settings window with container name and port populated" width=40%></img>
 
 In the "**Container**" tab you can see if all went well and the container is running. There should be a green dot in front of the name. 
 
-<img src="img\conciliator_docker_container_run" alt="a screenshot of Docker Desktop showing available containers" style="zoom:67%;" align="left"/>
+<img src="img\conciliator_docker_container_run" alt="a screenshot of Docker Desktop showing available containers" width=60%></img>
 
 If issues were encountered during the start-up of the container you'll be taken straight to the "Logs" tab of the container. 
 
@@ -201,7 +202,7 @@ Open your OpenRefine project and select "**Reconcile**" → "**Start reconciling
 
 Click "**Add standard service**" and enter the **URL** your choice of mode and ID requires. Click "**Add service**".
 
-<img src="img\conciliator_openrefine_add_service" alt="screenshot illustrating adding a reconciliation service in OpenRefine" style="zoom:67%;" align="left" />
+<img src="img\conciliator_openrefine_add_service" alt="screenshot illustrating adding a reconciliation service in OpenRefine" width=60%></img>
 
 ### Reuse
 
