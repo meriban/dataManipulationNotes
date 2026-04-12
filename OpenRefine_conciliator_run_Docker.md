@@ -30,7 +30,7 @@ Docker needs a Linux environment to run. This is where WSL (**Windows Subsystem 
 
 When **opening Docker** Desktop it'll **prompt** you to install **WSL** if it's not there already, or to upgrade it if needed and tell you the respective commands to do so. To run them open e.g. a Command Line instance, paste the provided command in and press 'Enter'.
 
-Once installed you might see a new symbol, representing the Linux environment Docker is running on, in your File Explorer: [File Explorer symbol showing Docker installation](img\explorer_docker.png).
+Once installed you might see a new symbol, representing the Linux environment Docker is running on, in your File Explorer: [File Explorer symbol showing Docker installation](img/explorer_docker.png).
 
 You also need to get a **Docker account**. You can e.g. use an existing Google account for that or create one with Docker.
 
@@ -67,15 +67,15 @@ Some more Git vocabulary needed:
 >
 > When cloning a repository Git by default changes line endings[^2] to the ones native to your operating system. Usually that is a good thing. However, in this particular case that will be problematic, we need Linux line endings for the code to run in Docker. To get Git to change that behaviour run the following in the command line:
 >
-> ```cmd
-> git config --global core.autocrlf false
-> ```
->
-> You can revert it back to its default behaviour later if you want:
->
-> ```
-> git config --global core.autocrlf true
-> ```
+```cmd
+git config --global core.autocrlf false
+```
+
+You can revert it back to its default behaviour later if you want:
+
+```cmd
+git config --global core.autocrlf true
+```
 
 To clone the conciliator repository from GitHub, you can use the command line or a GUI tool (GitHub Desktop in the images below).
 
@@ -83,7 +83,7 @@ To clone the conciliator repository from GitHub, you can use the command line or
 
    Open a command line and navigate[^3] to the folder you want the repository to live. Then run the following command:
 
-   ```
+   ```cmd
    git clone https://github.com/codeforkjeff/conciliator
    ```
 
@@ -105,16 +105,16 @@ Open the command line and navigate to the folder containing the cloned repositor
 
 Run the following command to build the image:
 
-```
+```cmd
 docker build -t conciliator .
 ```
 You'll see a lot of text running by in the command line, let it do its thing. This might take a couple of minutes. Once it's finished, you'll have an entry called "conciliator" in Docker Desktop "**Builds**":
 
-<img src="G:\My Drive\docu\dataManipulationNotes\img\conciliator_docker_builds.png" alt="a screenshot of Docker Desktop showing available builds" style="zoom:67%;" align="left"/>
+<img src="img\conciliator_docker_builds.png" alt="a screenshot of Docker Desktop showing available builds" style="zoom:67%;" align="left"/>
 
 Given the build worked fine, there is now also an entry in "**Images**" called "conciliator":
 
-<img src="G:\My Drive\docu\dataManipulationNotes\img\conciliator_docker_images.png" alt="a screenshot of Docker Desktop showing available images" style="zoom: 67%;" align="left"/>
+<img src="img\conciliator_docker_images.png" alt="a screenshot of Docker Desktop showing available images" style="zoom: 67%;" align="left"/>
 
 ### Run the Docker image in a container[^4 ]
 
@@ -127,11 +127,11 @@ Expand the "Optional settings" and enter:
 
 Click "**Run**".
 
-<img src="G:\My Drive\docu\dataManipulationNotes\img\conciliator_docker_container_settings" alt="a screenshot of the optional settings window with container name and port populated" style="zoom:67%;" align="left" />
+<img src="img\conciliator_docker_container_settings" alt="a screenshot of the optional settings window with container name and port populated" style="zoom:67%;" align="left" />
 
 In the "**Container**" tab you can see if all went well and the container is running. There should be a green dot in front of the name. 
 
-<img src="G:\My Drive\docu\dataManipulationNotes\img\conciliator_docker_container_run" alt="a screenshot of Docker Desktop showing available containers" style="zoom:67%;" align="left"/>
+<img src="img\conciliator_docker_container_run" alt="a screenshot of Docker Desktop showing available containers" style="zoom:67%;" align="left"/>
 
 If issues were encountered during the start-up of the container you'll be taken straight to the "Logs" tab of the container. 
 
@@ -201,7 +201,7 @@ Open your OpenRefine project and select "**Reconcile**" → "**Start reconciling
 
 Click "**Add standard service**" and enter the **URL** your choice of mode and ID requires. Click "**Add service**".
 
-<img src="G:\My Drive\docu\dataManipulationNotes\img\conciliator_openrefine_add_service" alt="screenshot illustrating adding a reconciliation service in OpenRefine" style="zoom:67%;" align="left" />
+<img src="img\conciliator_openrefine_add_service" alt="screenshot illustrating adding a reconciliation service in OpenRefine" style="zoom:67%;" align="left" />
 
 ### Reuse
 
@@ -210,5 +210,5 @@ Once registered you can simply select the respective service from the list. (If 
 [^1]: Full explanation of Git: [https://git-scm.com/book/en/v2](https://git-scm.com/book/en/v2). 
 [^2]: Line endings are control characters a system writes to mark the boundary between two lines of text. In Windows that typically carriage return (CR) followed by line feed (LF), where as Linux uses line feed only. See e.g. [https://medium.com/@blazejsleboda/line-endings-on-macos-linux-and-windows-91b10fc61868](https://medium.com/@blazejsleboda/line-endings-on-macos-linux-and-windows-91b10fc61868) on the particulars.
 [^3]: If you have no idea how to do this, simply open the File Explorer, go to the place you want, click into the address bar, type "cmd" and press "Enter".
-[^4 ]: I could not get the command line run mentioned in the repository documentation running.
+[^4 ]:  could not get the command line run mentioned in the repository documentation running.
 [^5]: You can find a source's ID by going to [https://viaf.org/en](https://viaf.org/en) and either hovering over the link and reading the code from the link preview, or clicking on it and then taking it from the URL itself. E.g. the URL for the National Library of Brazil is https://viaf.org/en/contributors?id=BLBNB, hence its source code is BLBNB. 
