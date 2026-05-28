@@ -6,15 +6,17 @@ To work with files in the formats discussed, work with a **text editor that can 
 
 **Notepad++** is a nice and easy one to get started with. The interface looks kind of familiar to office programmes. Plugins are available to make working with e.g. JSON and XML files easier. There are also a number of extensions to make your life easier:
 
-- [CSVLint](#csv-lint) for working with CSV files,
+- [CSVLint](#csv-lint) for working with CSV and other delimited files,
 - [XML Tools](#xml-tools) for working with XML files, and
 - [JSON Tools](#json-tools) for working with JSON files.
 
 **Visual Studio Code** (VS Code) is a lot more than just a text editor, you can use this as a development environment and run code from it. It has a terminal and debugging functionality. The learning curve is a bit steeper, the interface is less familiar if you come from the usual office apps and more is done via keyboard shortcuts or commands. There are lots of extensions and plugins, you can connect it to AI etc. You get the idea: it can do a lot and thus is more complex to learn.
 
+VS Code has built-in syntax support for JSON and XML and a useful extension for CSV and other delimited files called [Rainbow CSV](#rainbow-csv). See [below](#csv) for instructions in installation. 
+
 Visual Studio Code also has a browser version if you cannot or don't want to install anything on your machine: https://vscode.dev/. 
 
-## Tabular data
+## Tabular data[^2]
 
 Tabular data formats, like CSV and TSV, are **plain text** data formats that store **tables**. The table **rows** are separated by a **newline** and the **columns** are separated by a **delimiter**. The delimiter varies between formats. Using custom delimiters is also possible, though you might want to save the file as simple text file (.txt) in this case to avoid confusion.
 
@@ -26,7 +28,7 @@ Tabular data formats, like CSV and TSV, are **plain text** data formats that sto
 >
 > **Newline character(s)**
 >
-> The character(s) used for **newline** depend(s) on your operating system. **Windows** uses **CRLF** (carriage return and line feed), while Unix and Unix-like systems (e.g. **Linux** or **macOS**) use **LF** (line feed) only. You may run into problems if the newline character(s) in the file(s) your working with do not conform to what your operating system is expecting.
+> The character(s) used for **newline** depend(s) on your operating system. **Windows** uses **CRLF** (carriage return and line feed), while Unix and Unix-like systems (e.g. **Linux** or **macOS**) use **LF** (line feed) only. You may run into problems if the newline character(s) in the file(s) your working with do not conform to what your operating system is expecting.[^1]
 >
 > Text editors like Notepad++ and Visual Studio Code show you which newline character(s) are used in the file you have open and also let you change it. Look at the bottom right:
 >
@@ -124,9 +126,9 @@ Id,name,age,breed,colour
 
 > [!TIP]
 >
-> The quote and escape characters vary between different CSV dialects (yes, really). `"` Is the default defined in the standard CSV definition [RFC 4180](https://www.rfc-editor.org/rfc/rfc4180). 
+> The quote and escape characters **vary** between different **CSV dialects**. There is no canonical definition of CSV, the de facto standard is an informational RFC (RFC 4180[^3]) and there `"` is the default escape character. 
 >
-> Because different delimiters, line terminators, quote and escape characters as well as changes in other behaviours can make sense a specification on how to express the specific dialect exists: [CSV Dialect](https://specs.frictionlessdata.io/csv-dialect/) and e.g. the Python standard CSV parser lets you set delimiter, line terminators etc. as parameters when reading in a CSV file.
+> Because different delimiters, line terminators, quote and escape characters as well as changes in other behaviours can make sense a specification on how to express the specific dialect exists: **CSV Dialect**[^4] and e.g. the Python standard CSV parser lets you set delimiter, line terminators etc. as parameters when reading in a CSV file.
 
 **It's fine to quote all values, irrespective of them containing the delimiter.** I like this for consistency and readability.
 
@@ -156,13 +158,13 @@ There are some downsides as well though and depending on the structure of your d
 
 - a tabular data file can hold only **one table per file**. There are no "sheets" as in spreadsheet applications.
 - you **cannot put formulas** into them. They are just data and can't hold data transformation logic.
-- **nested and complex data doesn't** really **work** with them. If you can't easily put your data into a table, tabular data formats are not the weapon of choice.
+- **nested and complex data doesn't** really **work** with them. If you can't easily put your data into a table, tabular data formats are not the weapon of choice.[^5]
 
 ## XML
 
 XML stands for e**X**tensible **M**arkup **L**anguage. So, first what is a markup language?
 
-### Markup languages
+### Markup languages[^6]
 
 Markup languages allow one to **mark parts of data as a specific thing**. They have their roots in typesetting and text presentation: printers or typographers would *mark up* which typeface, style or text size to use for each part of a text. These instructions would then be followed by the typesetter or typesetting machine to set the text for printing.
 
@@ -170,11 +172,11 @@ There are markup languages around today (such as e.g. HTML, LaTeX, Markdown) tha
 
 Abstracting this a bit away from marking things for presentation and towards **labelling**, **categorising** and **structuring** information into elements and adding in some **rules** about which elements that can be, where they can occur etc. so the structure can be validated: we get XML. 
 
-### XML history and use
+### XML history and use[^7]
 
 XML as a standard has been around for nearly 30 years. Work on it started in 1996 and it was first published in 1998. It is maintained by the [World Wide Web Consortium](https://www.w3.org/) (W3C). 
 
-There are two versions: **[XML 1.0](https://www.w3.org/TR/xml/)**, which is in its 5th edition published in 2008 and [XML 1.1](https://www.w3.org/TR/xml11/) which is in its 2nd edition published in 2006. XML 1.0 is the default and what the W3C recommends to use. XML 1.1 has some additional, advanced features and should only be used if these are required[^77].
+There are two versions: **XML 1.0**[^8], which is in its 5th edition published in 2008 and XML 1.1[^9] which is in its 2nd edition published in 2006. XML 1.0 is the default and what the W3C recommends to use. XML 1.1 has some additional, advanced features and should only be used if these are required[^10].
 
 The main **purpose** of XML is **serialisation**, i.e. the 
 
@@ -188,7 +190,7 @@ It is designed to be both **machine- and human-readable**.
 
 XML is so fundamental that a lot of data formats you are working with every day are built on it. For example Word and Excel documents (.docx, .xlsx), vector graphics (.svg), HTML, RSS, ...
 
-### XML syntax
+### XML syntax[^11]
 
 Documents conforming to the XML syntax are **well formed.**
 
@@ -513,7 +515,7 @@ There are several ways of making schemas for use with XML documents. The most co
 
 DTD is the older one with less features, but it is still sometimes encountered. We're not going to run through this in detail, I'll just show an example for our cat data and talk you through it. XML Schema is a lot more common and we'll spend more time on this. 
 
-#### DTD
+#### DTD[^12]
 
 DTD stands for **D**ocument **T**ype **D**efinition. Unlike XML Schema it can live inside the XML document itself rather than be a separate file (though that is also possible); XML Schemas are always separate from the XML documents they define.
 
@@ -638,9 +640,9 @@ DTD is an old way of doing things that has some distinct disadvantages over XML 
 - it lack expressiveness and readability,
 - it uses regular expression syntax (remember `+`, `*`, `?` and `|`?), which makes it hard to parse.
 
-There is more to it then what's covered above, if you want to know more, W3Schools has a pretty accessible tutorial: [https://www.w3schools.com/xml/xml_dtd_intro.asp](https://www.w3schools.com/xml/xml_dtd_intro.asp) and the Wikipedia entry is pretty comprehensive too: [https://en.wikipedia.org/wiki/Document_type_definition](https://en.wikipedia.org/wiki/Document_type_definition). The actual specification is part of the XML 1.0 specification [https://www.w3.org/TR/xml/](https://www.w3.org/TR/xml/). Be warned though! It's not easy to tease out and barely comprehensible, stick with the tutorials, seriously!
+There is more to it then what's covered above, if you want to know more, W3Schools has a pretty [accessible tutorial](#dtd-w3s) and the [Wikipedia entry](#dtd-wikipedia) is pretty comprehensive too. The actual specification is part of the [XML 1.0 specification](#xml10). Be warned though! It's not easy to tease out and barely comprehensible, stick with the tutorials, seriously!
 
-### XML Schema Definition (XSD)
+### XML Schema Definition (XSD)[^13]
 
 XSD stands for **X**ML **S**chema **D**efinition and is the current standard to define the structure of an XML document. It defines:
 
@@ -655,11 +657,11 @@ As mentioned before, XML Schema has **advantages** over its predecessor DTD:
 
 - no need to learn another syntax, XML Schemas are XML documents,
 - it supports data types,
-- it supports namespaces (nearly there),
+- it supports namespaces (we'll talk about these in a sec),
 - it is extensible as it is XML based,
 - it allows for more fine-grained definitions of elements and attributes.
 
-### Namespaces
+### Namespaces[^14]
 
 #### What is a namespace?
 
@@ -703,7 +705,7 @@ Instead of writing it out every time, one defines a **shorthand for the namespac
 
 #### The default namespace, unqualified names
 
-Besides these **prefixed namespaces** there can also be a **default namespace**. The default namespace can be bound to a URI, but the tag names in it have **no shorthand prefix**.[^i]
+Besides these **prefixed namespaces** there can also be a **default namespace**. The default namespace can be bound to a URI, but the tag names in it have **no shorthand prefix**.[^15]
 
 > [!IMPORTANT]
 >
@@ -717,7 +719,7 @@ To **define the default namespace** add `xmlns="URI"` as an attribute to the roo
 
 To **define a prefixed namespace** add `xmlns:prefix="URI"` to the root element or respective parent. E.g. to declare the namespace `http://www.loc.gov/MARC21/slim` with the prefix `marc` you would write `xmlns:marc="http://www.loc.gov/MARC21/slim"`.
 
-At the same time one also sets the **pointer to the XML Schema file** defining the respective element(s) in the namespace. To do this we need an attribute that is defined in the XML Schema Instance schema, namely `schemaLocation`. Thus we need to define a prefixed namespace for it before we can use it: `xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"`.[^2] 
+At the same time one also sets the **pointer to the XML Schema file** defining the respective element(s) in the namespace. To do this we need an attribute that is defined in the XML Schema Instance schema, namely `schemaLocation`. Thus we need to define a prefixed namespace for it before we can use it: `xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"`.
 
 > [!NOTE]
 >
@@ -753,7 +755,7 @@ Putting this all together for our example we end up with:
 
 You might be wondering why we pointed to XSD files for the default namespace and `marc` but not `xsi`. The reason is that the pointer to the XSD for `xsi` is built-in. As long as you use `xsi` as the prefix, there is no need to point to the schema file for it.
 
-### Creating an XML Schema Definition
+### Creating an XML Schema Definition[^16]
 
 #### `xs:schema`
 
@@ -762,7 +764,7 @@ Every XML Schema Definition's **root element is `<xs:schema>`**, with attributes
 - the `xs` namespace (so we can use the elements and attributes defined there) `xmlns:xs="http://www.w3.org/2001/XMLSchema"`, 
 - the schema's default namespace `xmlns="https://www.example.com"`, 
 - the namespace the elements, attributes etc. in the schema belong to `targetNamespace="https://www.example.com"` (this is the namespace that should be used to reference this schema in XML documents using it),
-- some default values that guide how to XSD validation behaves `elementFormDefault="qualified"` and `attributeFormDefault="unqualified"`.[^ii]
+- some default values that guide how to XSD validation behaves `elementFormDefault="qualified"` and `attributeFormDefault="unqualified"`.[^17]
 
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
@@ -914,7 +916,7 @@ Our example has the cat IDs as an attribute, so let's add that:
 </xs:schema>
 ```
 
-#### Occurence
+#### Occurrence
 
 So far so good, but if we look back at the meaning of `xs:sequence` it means that `cat` can only occur once. That's no good as we have several cats. To fix this we can use the attributes `minOccurs` and `maxOccurs` with element definitions. 
 
@@ -1011,7 +1013,7 @@ The syntax to declare a fixed value is `fixed="value"` for both elements and att
 
 There is a range of restrictions that can be applied to **simple elements**. Which are possible and make sense depends on the data type of the element. The two we'll cover here are **numerical** restrictions and **enumerations**.
 
-We already set the value of `age` to be in integer, but it would also make sense to restrict the range this can be as well. According to Wikipedia the oldest cat ever got to 38 years and 3 days[^4]. Giving a bit of leeway, let's set an upper limit of 40 and lower limit of 0 for the `age` element.  To do this we need to expand the simple element declaration into several lines:
+We already set the value of `age` to be in integer, but it would also make sense to restrict the range this can be as well. According to Wikipedia the oldest cat ever got to 38 years and 3 days[^25]. Giving a bit of leeway, let's set an upper limit of 40 and lower limit of 0 for the `age` element.  To do this we need to expand the simple element declaration into several lines:
 
 - the element name and occurrence stays with the `<xs:element>` element, but it now needs a closing tag  (`</xs:element>`) as we'll add child elements to it containing the restriction,
 - add a child element to it with the tag `xs:simpleType`,
@@ -1098,12 +1100,12 @@ As before we need to expand the simple element into several lines. The `base` at
 
 ### Related specifications
 
-- **XSLT** (E**x**tensible **S**tylesheet **L**anguage **T**ransformations) -> transform from one XML into another
-- **XPath** (XML Path Language) -> address/select elements with an XML document
+- **XSLT** (E**x**tensible **S**tylesheet **L**anguage **T**ransformations) → transform from one XML into another
+- **XPath** (XML Path Language) → address/select elements with an XML document
 
-## JSON
+## JSON[^21]
 
-JSON stands for **J**ava**S**cript **O**bject **N**otation (it was extended from JavaScript). It was developed 2000/2001 and first standardised in 2013 as ECMA-404 and then again in 2017 as RFC 8259 and ISO-IEC 21778:2017. 
+JSON stands for **J**ava**S**cript **O**bject **N**otation (it was extended from JavaScript). It was developed 2000/2001 and first standardised in 2013 as ECMA-404[^18] and then again in 2017 as RFC 8259[^19] and ISO-IEC 21778:2017[^20]. 
 
 Just like XML its **purpose** is **data serialisation** (i.e. data storage, transmission and reconstruction). 
 
@@ -1128,7 +1130,7 @@ The **root** element must either be an **object** or an **array**.
 
 There is **no provision for comments** in JSON.
 
-That's it. That's all the rules.[^iii] 
+That's it. That's all the rules.[^23]
 
 ### JSON example
 
@@ -1218,7 +1220,7 @@ What's the difference? You'll mostly notice it when working with JSON data and e
 
 ### Validating JSON
 
-The validation vocabulary for JSON is called **JSON Schema**. JSON Schema documents are JSON documents. I have yet to encounter a situation where I had to work with this beyond experimentation, hence we'll not dwell on it. I'll just show you what it looks like and talk you through. 
+The validation vocabulary for JSON is called **JSON Schema**[^22]. JSON Schema documents are JSON documents. I have yet to encounter a situation where I had to work with this beyond experimentation, hence we'll not dwell on it. I'll just show you what it looks like and talk you through. 
 
 ```json
 {
@@ -1285,7 +1287,7 @@ The validation vocabulary for JSON is called **JSON Schema**. JSON Schema docume
 - `"required": ["id", "name" ]` means that the keys `id` and `name` must be present, for each cat, all others are optional.
 - `additionalProperties": false"` means no keys other than the ones given are allowed.
 
-## XML vs JSON
+## XML vs JSON[^24]
 
 If your use case doesn't dictate which format to use, how do you decide? There are some significant differences between XML and JSON that usually make JSON the better and easier to work with choice, especially if you also work with the data programmatically.
 
@@ -1300,12 +1302,6 @@ If your use case doesn't dictate which format to use, how do you decide? There a
 | Security               | Has some security concerns re DTDs, don't use them.       | Is safer than XML                                            |
 
 This might make it sound like JSON is always the better choice, but that's not true. If you need namespaces, data types JSON cannot support or very complex data structures, XML does the better job. [[1]](#implementation-data-types-and-structures-no-date)
-
-## Footnotes
-
-[^i]: The default namespace only works for elements. Namespaces for attributes work slightly differently. If you use an attribute that belong as per the schema to the respective element there is no need to prefix it, it is in this element's context. If you want to use an attribute from a different namespace though (as we e.g. do with `xsi:schemaLocation`) you need to prefix it. [https://stackoverflow.com/questions/3312390/xml-default-namespaces-for-unqualified-attribute-names](https://stackoverflow.com/questions/3312390/xml-default-namespaces-for-unqualified-attribute-names)[^82] has a good explanation of this.
-[^ii]: What these two do goes much deeper than the scope of this lesson. If you want to know more see e.g. https://stackoverflow.com/questions/1463138/what-does-elementformdefault-do-in-xsd[^74].
-[^iii]: There are some intricacies of which characters can be used for numbers and encoding bits for strings. None of which are terribly relevant for bibliographic use cases. See []. 
 
 ## Annotated bibliography and further reading
 
@@ -1357,101 +1353,139 @@ Finally, I found this article by Andrii Chornyi really useful to understand the 
 
 BBC Bitesize again has two gentle introductions to **how data is stored by computers**. They introduce **bits** and **bytes**, **binary** and **hexadecimal** number systems as well as ASCII and the basics of image and sound storage. W3School's "Introduction to Programming" also has a very accessible intro to data storage (and it might lead you to reading more about programming concepts).
 
-[^16]: ‘Binary and data representation’ (no date) *BBC Bitesize*. Available at: [https://www.bbc.co.uk/bitesize/guides/z6qqmsg](https://www.bbc.co.uk/bitesize/guides/z6qqmsg) [Accessed: 24 May 2026]
-[^17]: ‘Fundamentals of data representation’ (no date) *BBC Bitesize*. Available at: [https://www.bbc.co.uk/bitesize/guides/zd88jty](https://www.bbc.co.uk/bitesize/guides/zd88jty) [Accessed: 24 May 2026]
-[^18]: ‘What are Bits and Bytes?’ (no date) *W3Schools*. Available at: [https://www.w3schools.com/programming/prog_bits_and_bytes.php](https://www.w3schools.com/programming/prog_bits_and_bytes.php) [Accessed: 24 May 2026]
+- ‘Binary and data representation’ (no date) *BBC Bitesize*. Available at: [https://www.bbc.co.uk/bitesize/guides/z6qqmsg](https://www.bbc.co.uk/bitesize/guides/z6qqmsg) [Accessed: 24 May 2026]
+- ‘Fundamentals of data representation’ (no date) *BBC Bitesize*. Available at: [https://www.bbc.co.uk/bitesize/guides/zd88jty](https://www.bbc.co.uk/bitesize/guides/zd88jty) [Accessed: 24 May 2026]
+- ‘What are Bits and Bytes?’ (no date) *W3Schools*. Available at: [https://www.w3schools.com/programming/prog_bits_and_bytes.php](https://www.w3schools.com/programming/prog_bits_and_bytes.php) [Accessed: 24 May 2026]
 
 Moving on to actual **encodings** and code points, I found the following useful. They vary a bit in how deep they go and how techy they get, but all are on the accessible side:
 
-[^19]: Ishida, Richard (2018) *Character encodings: Essential concepts*. Available at: [https://www.w3.org/International/articles/definitions-characters/](https://www.w3.org/International/articles/definitions-characters/) [Accessed: 24 May 2026] -- This explains Unicode and how UTF-8, UTF-16 and UTF-32 work.
-[^20]: Ishida, Richard (2020) *Character encodings for beginners*. Available at: https://www.w3.org/International/questions/qa-what-is-encoding [Accessed: 24 May 2026] -- This one is more generally about character encoding and also explores the relationship between encoding and fonts.
-[^21]: Ishida, Richard (2024) *Character Sets and Encodings*. Available at: [https://www.w3.org/International/getting-started/characters](https://www.w3.org/International/getting-started/characters) [Accessed: 24 May 2026] -- This is more of a landing page with links to more in-depth information. As this is a W3C site there is a lot of emphasis on web development and how to deal with character encoding in HTML.
-[^22]: Krukowski, Ilya (2025) ‘Character encoding: Types, UTF-8, Unicode, and more explained’, *Lokalise blog*, 7 April. Available at: [https://lokalise.com/blog/what-is-character-encoding-exploring-unicode-utf-8-ascii-and-more](https://lokalise.com/blog/what-is-character-encoding-exploring-unicode-utf-8-ascii-and-more) [Accessed: 24 May 2026]
-[^23]: Spolsky, Joel (2003) ‘The Absolute Minimum Every Software Developer Absolutely, Positively Must Know About Unicode and Character Sets (No Excuses!)’, Joel on software, 8 October. Available at: [https://www.joelonsoftware.com/2003/10/08/the-absolute-minimum-every-software-developer-absolutely-positively-must-know-about-unicode-and-character-sets-no-excuses/](https://www.joelonsoftware.com/2003/10/08/the-absolute-minimum-every-software-developer-absolutely-positively-must-know-about-unicode-and-character-sets-no-excuses/) [Accessed: 24 May 2026] -- Quite old, but still very much true and often referenced.
-[^24]: Zentgraf, David C. (2015) *What every programmer absolutely, positively needs to know about encodings and character sets to work with text*. Available at: [https://kunststube.net/encoding/](https://kunststube.net/encoding/) [Accessed: 24 May 2026]
+- Ishida, Richard (2018) *Character encodings: Essential concepts*. Available at: [https://www.w3.org/International/articles/definitions-characters/](https://www.w3.org/International/articles/definitions-characters/) [Accessed: 24 May 2026]
+
+  *This explains Unicode and how UTF-8, UTF-16 and UTF-32 work.*
+
+- Ishida, Richard (2020) *Character encodings for beginners*. Available at: https://www.w3.org/International/questions/qa-what-is-encoding [Accessed: 24 May 2026]
+
+  *This one is more generally about character encoding and also explores the relationship between encoding and fonts.*
+
+- Ishida, Richard (2024) *Character Sets and Encodings*. Available at: [https://www.w3.org/International/getting-started/characters](https://www.w3.org/International/getting-started/characters) [Accessed: 24 May 2026] 
+
+  *This is more of a landing page with links to more in-depth information. As this is a W3C site there is a lot of emphasis on web development and how to deal with character encoding in HTML.*
+
+- Krukowski, Ilya (2025) ‘Character encoding: Types, UTF-8, Unicode, and more explained’, *Lokalise blog*, 7 April. Available at: [https://lokalise.com/blog/what-is-character-encoding-exploring-unicode-utf-8-ascii-and-more](https://lokalise.com/blog/what-is-character-encoding-exploring-unicode-utf-8-ascii-and-more) [Accessed: 24 May 2026]
+
+- Spolsky, Joel (2003) ‘The Absolute Minimum Every Software Developer Absolutely, Positively Must Know About Unicode and Character Sets (No Excuses!)’, Joel on software, 8 October. Available at: [https://www.joelonsoftware.com/2003/10/08/the-absolute-minimum-every-software-developer-absolutely-positively-must-know-about-unicode-and-character-sets-no-excuses/](https://www.joelonsoftware.com/2003/10/08/the-absolute-minimum-every-software-developer-absolutely-positively-must-know-about-unicode-and-character-sets-no-excuses/) [Accessed: 24 May 2026]
+
+  *Quite old, but still very much true and often referenced.*
+
+- Zentgraf, David C. (2015) *What every programmer absolutely, positively needs to know about encodings and character sets to work with text*. Available at: [https://kunststube.net/encoding/](https://kunststube.net/encoding/) [Accessed: 24 May 2026]
 
 The **Wikipedia** articles on the subject all take you a lot deeper into the topic and may be more suitable once you got the basics and want to know more.
 
-[^25]: ‘ASCII’ (2026) *Wikipedia*. Available at: [https://en.wikipedia.org/wiki/ASCII](https://en.wikipedia.org/wiki/ASCII) [Accessed: 24 May 2026]
-[^26]: ‘Bit’ (2026) *Wikipedia*. Available at: [https://en.wikipedia.org/wiki/Bit](https://en.wikipedia.org/wiki/Bit) [Accessed: 24 May 2026]
-[^27]: ‘Byte’ (2026) *Wikipedia*. Available at: [https://en.wikipedia.org/wiki/Byte](https://en.wikipedia.org/wiki/Byte) [Accessed: 24 May 2026]
-[^28]: ‘Character encoding’ (2026) *Wikipedia*. Available at: [https://en.wikipedia.org/wiki/Character_encoding](https://en.wikipedia.org/wiki/Character_encoding) [Accessed: 24 May 2026]
-[^29]: ‘Comparison of Unicode encodings’ (2026) *Wikipedia*. Available at: [https://en.wikipedia.org/wiki/Comparison_of_Unicode_encodings](https://en.wikipedia.org/wiki/Comparison_of_Unicode_encodings) [Accessed: 24 May 2026]
-[^30]: ‘Mojibake’ (2026) *Wikipedia*. Available at: [https://en.wikipedia.org/wiki/Mojibake](https://en.wikipedia.org/wiki/Mojibake) [Accessed: 24 May 2026]
-[^31]: ‘Unicode’ (2026) *Wikipedia*. Available at: [https://en.wikipedia.org/wiki/Unicode](https://en.wikipedia.org/wiki/Unicode) [Accessed: 24 May 2026]
-[^32]: ‘UTF-8’ (2026) *Wikipedia*. Available at: [https://en.wikipedia.org/wiki/UTF-8](https://en.wikipedia.org/wiki/UTF-8) [Accessed: 24 May 2026]
-[^33]: ‘Windows-1252’ (2026) *Wikipedia*. Available at: [https://en.wikipedia.org/wiki/Windows-1252](https://en.wikipedia.org/wiki/Windows-1252) [Accessed: 24 May 2026]
+- ‘ASCII’ (2026) *Wikipedia*. Available at: [https://en.wikipedia.org/wiki/ASCII](https://en.wikipedia.org/wiki/ASCII) [Accessed: 24 May 2026]
+- ‘Bit’ (2026) *Wikipedia*. Available at: [https://en.wikipedia.org/wiki/Bit](https://en.wikipedia.org/wiki/Bit) [Accessed: 24 May 2026]
+- ‘Byte’ (2026) *Wikipedia*. Available at: [https://en.wikipedia.org/wiki/Byte](https://en.wikipedia.org/wiki/Byte) [Accessed: 24 May 2026]
+- ‘Character encoding’ (2026) *Wikipedia*. Available at: [https://en.wikipedia.org/wiki/Character_encoding](https://en.wikipedia.org/wiki/Character_encoding) [Accessed: 24 May 2026]
+- ‘Comparison of Unicode encodings’ (2026) *Wikipedia*. Available at: [https://en.wikipedia.org/wiki/Comparison_of_Unicode_encodings](https://en.wikipedia.org/wiki/Comparison_of_Unicode_encodings) [Accessed: 24 May 2026]
+- ‘Mojibake’ (2026) *Wikipedia*. Available at: [https://en.wikipedia.org/wiki/Mojibake](https://en.wikipedia.org/wiki/Mojibake) [Accessed: 24 May 2026]
+- ‘Unicode’ (2026) *Wikipedia*. Available at: [https://en.wikipedia.org/wiki/Unicode](https://en.wikipedia.org/wiki/Unicode) [Accessed: 24 May 2026]
+- ‘UTF-8’ (2026) *Wikipedia*. Available at: [https://en.wikipedia.org/wiki/UTF-8](https://en.wikipedia.org/wiki/UTF-8) [Accessed: 24 May 2026]
+- ‘Windows-1252’ (2026) *Wikipedia*. Available at: [https://en.wikipedia.org/wiki/Windows-1252](https://en.wikipedia.org/wiki/Windows-1252) [Accessed: 24 May 2026]
 
 Finally, some further sources I used to put the workshop together.
 
-[^34]: ‘code, n., sense II.4.b’ (2026) in *Oxford English Dictionary*. Available at: [https://doi.org/10.1093/OED/1750064856](https://doi.org/10.1093/OED/1750064856) [Accessed: 24 May 2026]
-[^35]: ‘code, n., sense II.7’ (2026) in *Oxford English Dictionary*. Available at: [https://doi.org/10.1093/OED/8027718018](https://doi.org/10.1093/OED/8027718018) [Accessed: 24 May 2026]
-[^36]: ‘decode, v.’ (2025) in *Oxford English Dictionary*. Available at: [https://doi.org/10.1093/OED/3318848028](https://doi.org/10.1093/OED/3318848028) [Accessed: 24 May 2026]
-[^37]: ‘encode, v.’ (2025) in *Oxford English Dictionary*. Available at: [https://doi.org/10.1093/OED/7215232060](https://doi.org/10.1093/OED/7215232060) [Accessed: 24 May 2026]
-[^38]: *FAQ* (no date) Available at: [https://home.unicode.org/basic-info/faq/](https://home.unicode.org/basic-info/faq/) [Accessed: 24 May 2026]
-[^39]: Library of Congress Network Development and MARC Standards Office (2000) *MARC 21 Specification for Record Structure, Character Sets, and Exchange Media*. Available at: [https://www.loc.gov/marc/specifications/spechome.html](https://www.loc.gov/marc/specifications/spechome.html) [Accessed: 24 May 2026]
-[^40]: MrAureliusR (2025) *ASCII-Table-wide.svg*. Available at: [https://commons.wikimedia.org/wiki/File:ASCII-Table-wide.svg](https://commons.wikimedia.org/wiki/File:ASCII-Table-wide.svg) [Accessed: 24 May 2026]
-[^41]: *Supported Scripts* (no date) Available at: [https://www.unicode.org/standard/supported.html](https://www.unicode.org/standard/supported.html) [Accessed: 24 May 2026]
-[^42]: *Unicode 17.0 Character Code Charts* (no date) Available at: [https://www.unicode.org/charts/](https://www.unicode.org/charts/) [Accessed: 24 May 2026]
-[^43]: *Unicode 17.0 Versioned Charts Index* (no date) Available at: [https://www.unicode.org/charts/PDF/Unicode-17.0/](https://www.unicode.org/charts/PDF/Unicode-17.0/) [Accessed: 24 May 2026]
-[^44]: *Unicode Code Charts Help and Links* (no date) Available at: [https://unicode.org/charts/About.html](https://unicode.org/charts/About.html) [Accessed: 24 May 2026]
-[^45]: *Unicode Planes* (no date) Available at: [https://codepoints.net/planes](https://codepoints.net/planes) [Accessed: 24 May 2026]
-[^46]: *Unicode Statistics* (2025) Available at: [https://www.unicode.org/versions/stats/](https://www.unicode.org/versions/stats/) [Accessed: 24 May 2026]
+- ‘code, n., sense II.4.b’ (2026) in *Oxford English Dictionary*. Available at: [https://doi.org/10.1093/OED/1750064856](https://doi.org/10.1093/OED/1750064856) [Accessed: 24 May 2026]
+- ‘code, n., sense II.7’ (2026) in *Oxford English Dictionary*. Available at: [https://doi.org/10.1093/OED/8027718018](https://doi.org/10.1093/OED/8027718018) [Accessed: 24 May 2026]
+- ‘decode, v.’ (2025) in *Oxford English Dictionary*. Available at: [https://doi.org/10.1093/OED/3318848028](https://doi.org/10.1093/OED/3318848028) [Accessed: 24 May 2026]
+- ‘encode, v.’ (2025) in *Oxford English Dictionary*. Available at: [https://doi.org/10.1093/OED/7215232060](https://doi.org/10.1093/OED/7215232060) [Accessed: 24 May 2026]
+- *FAQ* (no date) Available at: [https://home.unicode.org/basic-info/faq/](https://home.unicode.org/basic-info/faq/) [Accessed: 24 May 2026]
+- Library of Congress Network Development and MARC Standards Office (2000) *MARC 21 Specification for Record Structure, Character Sets, and Exchange Media*. Available at: [https://www.loc.gov/marc/specifications/spechome.html](https://www.loc.gov/marc/specifications/spechome.html) [Accessed: 24 May 2026]
+- MrAureliusR (2025) *ASCII-Table-wide.svg*. Available at: [https://commons.wikimedia.org/wiki/File:ASCII-Table-wide.svg](https://commons.wikimedia.org/wiki/File:ASCII-Table-wide.svg) [Accessed: 24 May 2026]
+- *Supported Scripts* (no date) Available at: [https://www.unicode.org/standard/supported.html](https://www.unicode.org/standard/supported.html) [Accessed: 24 May 2026]
+- *Unicode 17.0 Character Code Charts* (no date) Available at: [https://www.unicode.org/charts/](https://www.unicode.org/charts/) [Accessed: 24 May 2026]
+- *Unicode 17.0 Versioned Charts Index* (no date) Available at: [https://www.unicode.org/charts/PDF/Unicode-17.0/](https://www.unicode.org/charts/PDF/Unicode-17.0/) [Accessed: 24 May 2026]
+- *Unicode Code Charts Help and Links* (no date) Available at: [https://unicode.org/charts/About.html](https://unicode.org/charts/About.html) [Accessed: 24 May 2026]
+- *Unicode Planes* (no date) Available at: [https://codepoints.net/planes](https://codepoints.net/planes) [Accessed: 24 May 2026]
+- *Unicode Statistics* (2025) Available at: [https://www.unicode.org/versions/stats/](https://www.unicode.org/versions/stats/) [Accessed: 24 May 2026]
 
 ### Data formats in general
 
 Some articles explaining the end of line (EOL) character problem of **line feed** (LF) and **carriage return** (CR):
 
-[^47]: *Carriage Returns: A Comprehensive Guide to Carriage Returns, Line Breaks and CRLF* (2025) Available at: [https://www.joshuahumphrey.co.uk/carriage-returns/](https://www.joshuahumphrey.co.uk/carriage-returns/) [Accessed: 24 May 2026]
-[^48]: Meszaros, Bence (2021) 'Understanding digital line breaks: Carriage return, line feed, newline, \<br>, hard and soft breaks and all the line break mumbo-jumbo you can think of', *Medium*, 14 June. Available at: [https://decketts.medium.com/understanding-digital-line-breaks-5ddfaa66677b](https://decketts.medium.com/understanding-digital-line-breaks-5ddfaa66677b) [Accessed: 24 May 2026] -- This bring the HTML line break \<br> into the mix as well.
-[^49]: ‘Newline’ (2026) *Wikipedia*. Available at: [https://en.wikipedia.org/wiki/Newline](https://en.wikipedia.org/wiki/Newline) [Accessed: 24 May 2026]
+- <a name= "crlf1"></a>*Carriage Returns: A Comprehensive Guide to Carriage Returns, Line Breaks and CRLF* (2025) Available at: [https://www.joshuahumphrey.co.uk/carriage-returns/](https://www.joshuahumphrey.co.uk/carriage-returns/) [Accessed: 24 May 2026]
+
+- <a name= "crlf2"></a>Meszaros, Bence (2021) 'Understanding digital line breaks: Carriage return, line feed, newline, \<br>, hard and soft breaks and all the line break mumbo-jumbo you can think of', *Medium*, 14 June. Available at: [https://decketts.medium.com/understanding-digital-line-breaks-5ddfaa66677b](https://decketts.medium.com/understanding-digital-line-breaks-5ddfaa66677b) [Accessed: 24 May 2026]
+
+  *This bring the HTML line break \<br> into the mix as well.*
+
+- <a name= "crlf3"></a>‘Newline’ (2026) *Wikipedia*. Available at: [https://en.wikipedia.org/wiki/Newline](https://en.wikipedia.org/wiki/Newline) [Accessed: 24 May 2026]
 
 And some randomness I looked at and found useful while putting the workshop together:
 
-[^50]: ‘Comparison of data-serialization formats’ (2026) *Wikipedia*. Available at: [https://en.wikipedia.org/wiki/Comparison_of_data-serialization_formats](https://en.wikipedia.org/wiki/Comparison_of_data-serialization_formats) [Accessed: 24 May 2026]
+- ‘Comparison of data-serialization formats’ (2026) *Wikipedia*. Available at: [https://en.wikipedia.org/wiki/Comparison_of_data-serialization_formats](https://en.wikipedia.org/wiki/Comparison_of_data-serialization_formats) [Accessed: 24 May 2026]
 
 ### Tabular data
 
 The Wikipedia articles here to a very good job at explaining how CSV and TSV, and indeed any delimiter-separated format, work(s):
 
-[^51]: ‘Comma-separated values’ (2026) *Wikipedia*. Available at: [https://en.wikipedia.org/wiki/Comma-separated_values](https://en.wikipedia.org/wiki/Comma-separated_values) [Accessed: 24 May 2026] 
-[^52]:‘Delimiter’ (2026) *Wikipedia*. Available at: [https://en.wikipedia.org/wiki/Delimiter](https://en.wikipedia.org/wiki/Delimiter) [Accessed: 24 May 2026]
-[^53]:‘Delimiter-separated values’ (2026) *Wikipedia*. Available at: [https://en.wikipedia.org/wiki/Delimiter-separated_values](https://en.wikipedia.org/wiki/Delimiter-separated_values) [Accessed: 24 May 2026]
-[^54]:‘Tab-separated values’ (2026) *Wikipedia*. Available at: [https://en.wikipedia.org/wiki/Tab-separated_values](https://en.wikipedia.org/wiki/Tab-separated_values) [Accessed: 24 May 2026]
-[^55]:‘Table (information)’ (2026) *Wikipedia*. Available at: [https://en.wikipedia.org/wiki/Table_(information)](https://en.wikipedia.org/wiki/Table_(information)) [Accessed: 24 May 2026]
+- <a name= "csv-wikipedia"></a>‘Comma-separated values’ (2026) *Wikipedia*. Available at: [https://en.wikipedia.org/wiki/Comma-separated_values](https://en.wikipedia.org/wiki/Comma-separated_values) [Accessed: 24 May 2026] 
+
+- <a name= "delimiter"></a>‘Delimiter’ (2026) *Wikipedia*. Available at: [https://en.wikipedia.org/wiki/Delimiter](https://en.wikipedia.org/wiki/Delimiter) [Accessed: 24 May 2026]
+
+- <a name= "dsv"></a>‘Delimiter-separated values’ (2026) *Wikipedia*. Available at: [https://en.wikipedia.org/wiki/Delimiter-separated_values](https://en.wikipedia.org/wiki/Delimiter-separated_values) [Accessed: 24 May 2026]
+
+- <a name= "tsv"></a>‘Tab-separated values’ (2026) *Wikipedia*. Available at: [https://en.wikipedia.org/wiki/Tab-separated_values](https://en.wikipedia.org/wiki/Tab-separated_values) [Accessed: 24 May 2026]
+
+- <a name= "table"></a>‘Table (information)’ (2026) *Wikipedia*. Available at: [https://en.wikipedia.org/wiki/Table_(information)](https://en.wikipedia.org/wiki/Table_(information)) [Accessed: 24 May 2026]
 
 Both CSV and TSV have no proper **standard definition**. The closest each has is still extremely readable and understandable as far as standards go. These are not scary:
 
-[^56]: Shafranovich, Yakov (2005) *RFC 4180: Common Format and MIME Type for Comma-Separated Values (CSV) Files*. Available at: [https://doi.org/10.17487/RFC4180](https://doi.org/10.17487/RFC4180) [Accessed: 24 May 2026] -- The closest CSV has to a standard definition.
-[^57]:University of Minnesota Internet Gopher Team (no date) *Definition of tab-separated-values (tsv)*. Available at: [https://www.iana.org/assignments/media-types/text/tab-separated-values](https://www.iana.org/assignments/media-types/text/tab-separated-values) [Accessed: 24 May 2026] -- The closest TSV has to a standard definition.
+- <a name= "Shafranovich-2005"></a>Shafranovich, Yakov (2005) *RFC 4180: Common Format and MIME Type for Comma-Separated Values (CSV) Files*. Available at: [https://doi.org/10.17487/RFC4180](https://doi.org/10.17487/RFC4180) [Accessed: 24 May 2026] 
+
+  *The closest CSV has to a standard definition.*
+
+- <a name= "tsv-def"></a>University of Minnesota Internet Gopher Team (no date) *Definition of tab-separated-values (tsv)*. Available at: [https://www.iana.org/assignments/media-types/text/tab-separated-values](https://www.iana.org/assignments/media-types/text/tab-separated-values) [Accessed: 24 May 2026] 
+
+  *The closest TSV has to a standard definition.*
 
 Further sources I used to compile the workshop and best practice documents for CSV:
 
-[^58]:*CSV Format: History, Advantages and Why It Is Still Popular* (no date) Available at: [https://bytescout.com/blog/csv-format-history-advantages.html](https://bytescout.com/blog/csv-format-history-advantages.html) [Accessed: 24 May 2026]
-[^59]:Pollock, Rufus (2021) *CSV Dialect*. Available at: [https://specs.frictionlessdata.io/csv-dialect/](https://specs.frictionlessdata.io/csv-dialect/) [Accessed: 24 May 2026] -- Defines a standard JSON-based format to specify CSV dialects.
-[^60]:Tennison, Jeni (2016) *CSV on the Web: A Primer*. Available at: [https://www.w3.org/TR/2016/NOTE-tabular-data-primer-20160225/](https://www.w3.org/TR/2016/NOTE-tabular-data-primer-20160225/) [Accessed: 24 May 2026] -- This is pretty techy and mostly concerned with dealing with CSVs on the web.
-[^61]:Tennison, Jeni, Kellogg, Greg and Herman, Ivan (2015) ‘Best Practice CSV’ in J. Tennison, G. Kellogg and I. Herman (eds.), *Model for Tabular Data and Metadata on the Web*. Available at: [https://www.w3.org/TR/2015/REC-tabular-data-model-20151217/#syntax](https://www.w3.org/TR/2015/REC-tabular-data-model-20151217/#syntax) [Accessed: 24 May 2026] -- This chapter is short, techy recap of CSV, the rest is way too techy for the scope of this webinar.
-[^62]:Walsh, Paul, Pollock, Rufus and Keegan, Martin (2017) *Tabular Data Package*. Available at: [https://specs.frictionlessdata.io/tabular-data-package/](https://specs.frictionlessdata.io/tabular-data-package/) [Accessed: 24 May 2026] -- Similar to "CSV Dialect", but this time concerned with describing the data itself.
+- <a name= "bytescout"></a>*CSV Format: History, Advantages and Why It Is Still Popular* (no date) Available at: [https://bytescout.com/blog/csv-format-history-advantages.html](https://bytescout.com/blog/csv-format-history-advantages.html) [Accessed: 24 May 2026]
+
+- <a name= "Pollok-2021"></a>Pollock, Rufus (2021) *CSV Dialect*. Available at: [https://specs.frictionlessdata.io/csv-dialect/](https://specs.frictionlessdata.io/csv-dialect/) [Accessed: 24 May 2026]
+
+  *Defines a standard JSON-based format to specify CSV dialects.*
+
+- <a name= "Tennison-2016"></a>Tennison, Jeni (2016) *CSV on the Web: A Primer*. Available at: [https://www.w3.org/TR/2016/NOTE-tabular-data-primer-20160225/](https://www.w3.org/TR/2016/NOTE-tabular-data-primer-20160225/) [Accessed: 24 May 2026] 
+
+  *This is pretty techy and mostly concerned with dealing with CSVs on the web.*
+
+- <a name= "Tennison-et-al-2015"></a>Tennison, Jeni, Kellogg, Greg and Herman, Ivan (2015) ‘Best Practice CSV’ in J. Tennison, G. Kellogg and I. Herman (eds.), *Model for Tabular Data and Metadata on the Web*. Available at: [https://www.w3.org/TR/2015/REC-tabular-data-model-20151217/#syntax](https://www.w3.org/TR/2015/REC-tabular-data-model-20151217/#syntax) [Accessed: 24 May 2026]
+
+  *This chapter is short, techy recap of CSV, the rest is way too techy for the scope of this webinar.*
+
+- <a name= "Walsh-et-al-2017"></a>Walsh, Paul, Pollock, Rufus and Keegan, Martin (2017) *Tabular Data Package*. Available at: [https://specs.frictionlessdata.io/tabular-data-package/](https://specs.frictionlessdata.io/tabular-data-package/) [Accessed: 24 May 2026]
+
+  *Similar to "CSV Dialect", but this time concerned with describing the data itself.*
 
 ### XML
 
 My default XML, DTD and XML Schema references are the **W3Schools' XML tutorials**:
 
-[^63]: 'XML Tutorial' (no date) *W3Schools*. Available at: [https://www.w3schools.com/xml/default.asp](https://www.w3schools.com/xml/default.asp) [Accessed: 24 May 2026]
-[^64]: 'DTD Tutorial' (no date) *W3Schools*. Available at: [https://www.w3schools.com/xml/xml_dtd_intro.asp](https://www.w3schools.com/xml/xml_dtd_intro.asp) [Accessed: 24 May 2026]
-[^65]: 'XML Schema Tutorial' (no date) *W3Schools*. Available at: [https://www.w3schools.com/xml/schema_intro.asp](https://www.w3schools.com/xml/schema_intro.asp) [Accessed: 24 May 2026]
+- <a name= "xml-w3s"></a>'XML Tutorial' (no date) *W3Schools*. Available at: [https://www.w3schools.com/xml/default.asp](https://www.w3schools.com/xml/default.asp) [Accessed: 24 May 2026]
+- <a name= "dtd-w3s"></a>'DTD Tutorial' (no date) *W3Schools*. Available at: [https://www.w3schools.com/xml/xml_dtd_intro.asp](https://www.w3schools.com/xml/xml_dtd_intro.asp) [Accessed: 24 May 2026]
+- <a name= "xsd-w3s"></a>'XML Schema Tutorial' (no date) *W3Schools*. Available at: [https://www.w3schools.com/xml/schema_intro.asp](https://www.w3schools.com/xml/schema_intro.asp) [Accessed: 24 May 2026]
 
 There are a lot of other tutorials out there though. Ones I found useful before are the TutorialsPoint ones:
 
-[^66]: 'XML Tutorial' (no date) *TutorialsPoint*. Available at: [https://www.tutorialspoint.com/xml/index.htm](https://www.tutorialspoint.com/xml/index.htm) [Accessed: 24 May 202
-[^67]:'DTD Tutorial' (no date) *TutorialsPoint*. Available at: [https://www.tutorialspoint.com/dtd/index.htm](https://www.tutorialspoint.com/dtd/index.htm) [Accessed: 24 May 2026]
-[^68]:'XSD Tutorial' (no date) *TutorialsPoint*. Available at: [https://www.tutorialspoint.com/xsd/index.htm](https://www.tutorialspoint.com/xsd/index.htm) [Accessed: 24 May 2026]
+- 'XML Tutorial' (no date) *TutorialsPoint*. Available at: [https://www.tutorialspoint.com/xml/index.htm](https://www.tutorialspoint.com/xml/index.htm) [Accessed: 24 May 202
+- 'DTD Tutorial' (no date) *TutorialsPoint*. Available at: [https://www.tutorialspoint.com/dtd/index.htm](https://www.tutorialspoint.com/dtd/index.htm) [Accessed: 24 May 2026]
+- 'XSD Tutorial' (no date) *TutorialsPoint*. Available at: [https://www.tutorialspoint.com/xsd/index.htm](https://www.tutorialspoint.com/xsd/index.htm) [Accessed: 24 May 2026]
 
 [GeeksforGeeks](https://www.geeksforgeeks.org/) is sometimes useful as well and, of course the awesomeness that is [StackOverflow](https://stackoverflow.com/) (though the usual way of ending up there is googling something). 
 
 Specifically for **DTD**, the Wikipedia page is basically a tutorial too:
 
-[^69]: 'Document type definition' (2026) *Wikipedia*. Available at: [https://en.wikipedia.org/wiki/Document_type_definition](https://en.wikipedia.org/wiki/Document_type_definition) [Accessed: 24 May 2026]
+- <a name= "dtd-wikipedia"></a>'Document type definition' (2026) *Wikipedia*. Available at: [https://en.wikipedia.org/wiki/Document_type_definition](https://en.wikipedia.org/wiki/Document_type_definition) [Accessed: 24 May 2026]
 
 There are loads of resources on YouTube as well, but I don't learn well that way so I don't have any recommendations. Sorry!
 
@@ -1459,86 +1493,126 @@ The **technical XML and XSD specifications**. These are on the barely readable e
 
 **XML (and DTD):**
 
-[^70]:*Extensible Markup Language (XML) 1.0* (2008) 5th ed. Available at: [https://www.w3.org/TR/2008/REC-xml-20081126/](https://www.w3.org/TR/2008/REC-xml-20081126/) [Accessed: 24 May 2026]
-[^71]:*Extensible Markup Language (XML) 1.1* (2006) 2nd ed. Available at: [https://www.w3.org/TR/2006/REC-xml11-20060816](https://www.w3.org/TR/2006/REC-xml11-20060816) [Accessed: 24 May 2026]
+- <a name= "xml10"></a>*Extensible Markup Language (XML) 1.0* (2008) 5th ed. Available at: [https://www.w3.org/TR/2008/REC-xml-20081126/](https://www.w3.org/TR/2008/REC-xml-20081126/) [Accessed: 24 May 2026]
+- <a name= "xml11"></a>*Extensible Markup Language (XML) 1.1* (2006) 2nd ed. Available at: [https://www.w3.org/TR/2006/REC-xml11-20060816](https://www.w3.org/TR/2006/REC-xml11-20060816) [Accessed: 24 May 2026]
 
 **XML Schema:**
 
-[^72]:*W3C XML Schema Definition Language (XSD) 1.1 Part 1: Structures* (2012) Available at: [https://www.w3.org/TR/2012/REC-xmlschema11-1-20120405/](https://www.w3.org/TR/2012/REC-xmlschema11-1-20120405/) [Accessed: 24 May 2026]
-[^73]: *W3C XML Schema Definition Language (XSD) 1.1 Part 2: Datatypes* (2012) Available at: [https://www.w3.org/TR/2012/REC-xmlschema11-2-20120405/](https://www.w3.org/TR/2012/REC-xmlschema11-2-20120405/) [Accessed: 24 May 2026]
+- *W3C XML Schema Definition Language (XSD) 1.1 Part 1: Structures* (2012) Available at: [https://www.w3.org/TR/2012/REC-xmlschema11-1-20120405/](https://www.w3.org/TR/2012/REC-xmlschema11-1-20120405/) [Accessed: 24 May 2026]
+- *W3C XML Schema Definition Language (XSD) 1.1 Part 2: Datatypes* (2012) Available at: [https://www.w3.org/TR/2012/REC-xmlschema11-2-20120405/](https://www.w3.org/TR/2012/REC-xmlschema11-2-20120405/) [Accessed: 24 May 2026]
 
 Other sources related to XML, DTDs and XML Schema I used for putting the workshop together:
 
-[^74]: kjhughes (2020) *Response to: What does elementFormDefault do in XSD?* Available at: [https://stackoverflow.com/a/46758277](https://stackoverflow.com/a/46758277) [Accessed: 24 May 2026]
-[^75]: 'Markup language' (2026) *Wikipedia*. Available at: https://en.wikipedia.org/wiki/Markup_language [Accessed: 24 May 2026]
-
-[^76]: 'XML' (2026) *Wikipedia*. Available at: [https://en.wikipedia.org/wiki/XML](https://en.wikipedia.org/wiki/XML) [Accessed: 24 May 2026]
-[^77]: XML Core Working Group Public Page (2017) Available at: [https://www.w3.org/XML/Core](https://www.w3.org/XML/Core) [Accessed: 24 May 2026]
-[^78]: 'XML DTD' (no date) *W3Schools*. Available at: [https://www.w3schools.com/xml/xml_dtd.asp](https://www.w3schools.com/xml/xml_dtd.asp) [Accessed: 24 May 2026]
-[^79]: *XML in 10 points* (2014) Available at [https://www.w3.org/XML/1999/XML-in-10-points.html](https://www.w3.org/XML/1999/XML-in-10-points.html) [Accessed: 24 May 2026]
-[^80]: 'XML Schema' (no date) *W3Schools*. Available at: [https://www.w3schools.com/xml/xml_schema.asp](https://www.w3schools.com/xml/xml_schema.asp) [Accessed: 24 May 2026]
-[^81]: 'XML Schema (W3C)' (2026) *Wikipedia*. Available at: [https://en.wikipedia.org/wiki/XML_Schema_(W3C)](https://en.wikipedia.org/wiki/XML_Schema_(W3C)) [Accessed: 24 May 2026]
+- <a name= "kjhughes-2020"></a>kjhughes (2020) *Response to: What does elementFormDefault do in XSD?* Available at: [https://stackoverflow.com/a/46758277](https://stackoverflow.com/a/46758277) [Accessed: 24 May 2026]
+- <a name= "markup"></a>'Markup language' (2026) *Wikipedia*. Available at: https://en.wikipedia.org/wiki/Markup_language [Accessed: 24 May 2026]
+- <a name= "xml-wikidpedia"></a>'XML' (2026) *Wikipedia*. Available at: [https://en.wikipedia.org/wiki/XML](https://en.wikipedia.org/wiki/XML) [Accessed: 24 May 2026]
+- <a name= "xml-core-wg"></a>*XML Core Working Group Public Page* (2017) Available at: [https://www.w3.org/XML/Core](https://www.w3.org/XML/Core) [Accessed: 24 May 2026]
+- <a name= "dtd-w3s-2"></a>'XML DTD' (no date) *W3Schools*. Available at: [https://www.w3schools.com/xml/xml_dtd.asp](https://www.w3schools.com/xml/xml_dtd.asp) [Accessed: 24 May 2026]
+- <a name= "xml-in-10-points"></a>*XML in 10 points* (2014) Available at [https://www.w3.org/XML/1999/XML-in-10-points.html](https://www.w3.org/XML/1999/XML-in-10-points.html) [Accessed: 24 May 2026]
+- <a name= "xsd-w3s-2"></a>'XML Schema' (no date) *W3Schools*. Available at: [https://www.w3schools.com/xml/xml_schema.asp](https://www.w3schools.com/xml/xml_schema.asp) [Accessed: 24 May 2026]
+- <a name= "xsd-wikipedia"></a>'XML Schema (W3C)' (2026) *Wikipedia*. Available at: [https://en.wikipedia.org/wiki/XML_Schema_(W3C)](https://en.wikipedia.org/wiki/XML_Schema_(W3C)) [Accessed: 24 May 2026]
 
 **Namespaces:**
 
-[^82]: mckamey (2019) *XML Default namespaces for unqualified attribute names?* Available at: [https://stackoverflow.com/q/3312390](https://stackoverflow.com/q/3312390) [Accessed: 24 May 2026] -- see [^i]. 
-[^83]: 'Namespace' (2026) *Wikipedia*. Available at: [https://en.wikipedia.org/wiki/Namespace](https://en.wikipedia.org/wiki/Namespace) [Accessed: 24 May 2026] -- This is reasonable accessible, but not specific to XML.
-[^84]: *Namespaces in XML 1.0* (2009) 3rd ed. Available at: https://www.w3.org/TR/2009/REC-xml-names-20091208/[](https://www.w3.org/TR/2009/REC-xml-names-20091208/) [Accessed: 24 May 2026] -- This is the W3C technical specification, so pretty hard reading.
-[^85]: *Namespaces in XML 1.1* (2006) 2nd ed. Available at: [https://www.w3.org/TR/2006/REC-xml-names11-20060816](https://www.w3.org/TR/2006/REC-xml-names11-20060816) [Accessed: 24 May 2026] -- This is the W3C technical specification for namespaces in XML 1.1, so pretty hard reading.
-[^86]: 'XML Namespace' (2025) *Wikipedia*. Available at: [https://en.wikipedia.org/wiki/XML_namespace](https://en.wikipedia.org/wiki/XML_namespace) [Accessed: 24 May 2026] -- This is reasonably accessible.
-[^87]: 'XML Namespaces' (no date) *W3Schools*. Available at: [https://www.w3schools.com/xml/xml_namespaces.asp](https://www.w3schools.com/xml/xml_namespaces.asp) [Accessed: 24 May 2026] -- This is reasonably accessible.
+- <a name= "mckamey-2019"></a>mckamey (2019) *XML Default namespaces for unqualified attribute names?* Available at: [https://stackoverflow.com/q/3312390](https://stackoverflow.com/q/3312390) [Accessed: 24 May 2026]
+
+- <a name= "ns-wikipedia"></a>'Namespace' (2026) *Wikipedia*. Available at: [https://en.wikipedia.org/wiki/Namespace](https://en.wikipedia.org/wiki/Namespace) [Accessed: 24 May 2026] 
+
+  *This is reasonable accessible, but not specific to XML.*
+
+- <a name= "ns10"></a>*Namespaces in XML 1.0* (2009) 3rd ed. Available at: https://www.w3.org/TR/2009/REC-xml-names-20091208/[](https://www.w3.org/TR/2009/REC-xml-names-20091208/) [Accessed: 24 May 2026]
+
+  *This is the W3C technical specification, so pretty hard reading.*
+
+- <a name= "ns11"></a>*Namespaces in XML 1.1* (2006) 2nd ed. Available at: [https://www.w3.org/TR/2006/REC-xml-names11-20060816](https://www.w3.org/TR/2006/REC-xml-names11-20060816) [Accessed: 24 May 2026]
+
+  *This is the W3C technical specification for namespaces in XML 1.1, so pretty hard reading.*
+
+- <a name= "xmlns-wikipedia"></a>'XML Namespace' (2025) *Wikipedia*. Available at: [https://en.wikipedia.org/wiki/XML_namespace](https://en.wikipedia.org/wiki/XML_namespace) [Accessed: 24 May 2026]
+
+  *This is reasonably accessible.*
+
+- <a name= "ns-w3s"></a>'XML Namespaces' (no date) *W3Schools*. Available at: [https://www.w3schools.com/xml/xml_namespaces.asp](https://www.w3schools.com/xml/xml_namespaces.asp) [Accessed: 24 May 2026]
+
+  *This is reasonably accessible.*
 
 **XML related standards:**
 
-[^88]: 'XPath' (2025) *Wikipedia*. Available at: [https://en.wikipedia.org/wiki/XPath](https://en.wikipedia.org/wiki/XPath) [Accessed: 24 May 2026]
-[^89]: 'XPath 2.0' (2025) *Wikipedia*. Available at: [https://en.wikipedia.org/wiki/XPath_2.0](https://en.wikipedia.org/wiki/XPath_2.0) [Accessed: 24 May 2026]
-[^90]: 'XPath 3' (2026) *Wikipedia*. Available at: [https://en.wikipedia.org/wiki/XPath_3](https://en.wikipedia.org/wiki/XPath_3) [Accessed: 24 May 2026]
-[^91]: *XML Path Language (XPath) Version 1.0* (1999) Available at: [https://www.w3.org/TR/1999/REC-xpath-19991116](https://www.w3.org/TR/1999/REC-xpath-19991116) [Accessed: 24 May 2026]
-[^92]: *XML Path Language (XPath) 2.0* (2011) 2nd ed. Available at: [https://www.w3.org/TR/2010/REC-xpath20-20101214/](https://www.w3.org/TR/2010/REC-xpath20-20101214/) [Accessed: 24 May 2026]
-[^93]: *XML Path Language (XPath) 3.0* (2014) Available at: [https://www.w3.org/TR/2014/REC-xpath-30-20140408/](https://www.w3.org/TR/2014/REC-xpath-30-20140408/) [Accessed: 24 May 2026]
-[^94]: *XML Path Language (XPath) 3.1* (2017) Available at: [https://www.w3.org/TR/2017/REC-xpath-31-20170321/](https://www.w3.org/TR/2017/REC-xpath-31-20170321/) [Accessed: 24 May 2026]
-[^95]: *XSL Transformations (XSLT) Version 3.0* (2017) Available at: https://www.w3.org/TR/2017/REC-xslt-30-20170608/[](https://www.w3.org/TR/2017/REC-xslt-30-20170608/) [Accessed: 24 May 2026]
-[^96]: 'XSLT' (2026) *Wikipedia*. Available at: [https://en.wikipedia.org/wiki/XSLT](https://en.wikipedia.org/wiki/XSLT) [Accessed: 24 May 2026]
+Compatibility of libraries and tools with XPath version varies greatly, hence so many links to all the different versions.
+
+- 'XPath' (2025) *Wikipedia*. Available at: [https://en.wikipedia.org/wiki/XPath](https://en.wikipedia.org/wiki/XPath) [Accessed: 24 May 2026]
+- 'XPath 2.0' (2025) *Wikipedia*. Available at: [https://en.wikipedia.org/wiki/XPath_2.0](https://en.wikipedia.org/wiki/XPath_2.0) [Accessed: 24 May 2026]
+- 'XPath 3' (2026) *Wikipedia*. Available at: [https://en.wikipedia.org/wiki/XPath_3](https://en.wikipedia.org/wiki/XPath_3) [Accessed: 24 May 2026]
+- *XML Path Language (XPath) Version 1.0* (1999) Available at: [https://www.w3.org/TR/1999/REC-xpath-19991116](https://www.w3.org/TR/1999/REC-xpath-19991116) [Accessed: 24 May 2026]
+- *XML Path Language (XPath) 2.0* (2011) 2nd ed. Available at: [https://www.w3.org/TR/2010/REC-xpath20-20101214/](https://www.w3.org/TR/2010/REC-xpath20-20101214/) [Accessed: 24 May 2026]
+- *XML Path Language (XPath) 3.0* (2014) Available at: [https://www.w3.org/TR/2014/REC-xpath-30-20140408/](https://www.w3.org/TR/2014/REC-xpath-30-20140408/) [Accessed: 24 May 2026]
+- *XML Path Language (XPath) 3.1* (2017) Available at: [https://www.w3.org/TR/2017/REC-xpath-31-20170321/](https://www.w3.org/TR/2017/REC-xpath-31-20170321/) [Accessed: 24 May 2026]
+
+
+
+- *XSL Transformations (XSLT) Version 3.0* (2017) Available at: https://www.w3.org/TR/2017/REC-xslt-30-20170608/[](https://www.w3.org/TR/2017/REC-xslt-30-20170608/) [Accessed: 24 May 2026]
+- 'XSLT' (2026) *Wikipedia*. Available at: [https://en.wikipedia.org/wiki/XSLT](https://en.wikipedia.org/wiki/XSLT) [Accessed: 24 May 2026]
 
 ### JSON
 
-[^97]: 'JavaScript JSON' (no date) *W3Schools*. Available at: [https://www.w3schools.com/js/js_json.asp](https://www.w3schools.com/js/js_json.asp) [Accessed: 24 May 2026] -- The W3Schools JSON tutorial is part of the JavaScript one and thus maybe not the best unless you are also interested in JavaScript.
-[^98]: 'JSON' (2026) *Wikipedia*. Available at: [https://en.wikipedia.org/wiki/JSON](https://en.wikipedia.org/wiki/JSON) [Accessed: 24 May 2026]
-[^99]: 'JSON Cheatsheet' (no date) in *JSON Tutorial*. Available at: [https://www.tutorialspoint.com/json/index.htm](https://www.tutorialspoint.com/json/index.htm) [Accessed: 24 May 2026] -- The syntax summary is useful and has plenty of examples.
+- <a name= "json-w3s"></a>'JavaScript JSON' (no date) *W3Schools*. Available at: [https://www.w3schools.com/js/js_json.asp](https://www.w3schools.com/js/js_json.asp) [Accessed: 24 May 2026] -- The W3Schools JSON tutorial is part of the JavaScript one and thus maybe not the best unless you are also interested in JavaScript.
+- <a name= "json-wikipedia"></a>'JSON' (2026) *Wikipedia*. Available at: [https://en.wikipedia.org/wiki/JSON](https://en.wikipedia.org/wiki/JSON) [Accessed: 24 May 2026]
+- <a name= "json-tp"></a>'JSON Cheatsheet' (no date) in *JSON Tutorial*. Available at: [https://www.tutorialspoint.com/json/index.htm](https://www.tutorialspoint.com/json/index.htm) [Accessed: 24 May 2026] -- The syntax summary is useful and has plenty of examples.
 
 **The technical standards:**
 
-[^100]: Bray, Tim (2013) *The JavaScript Object Notation (JSON) Data Interchange Format*. RFC 7158. Available at: [https://www.rfc-editor.org/info/rfc7158/](https://www.rfc-editor.org/info/rfc7158/) [Accessed: 24 May 2026] -- Intermediate proposed standard RFC, now obsolete, current standard is [].
-[^101]: Bray, Tim (2014) *The JavaScript Object Notation (JSON) Data Interchange Format*. RFC 7159. Available at: [https://www.rfc-editor.org/info/rfc7159/](https://www.rfc-editor.org/info/rfc7159/) [Accessed: 24 May 2026] -- Intermediate proposed standard RFC, now obsolete, current standard is [].
-[^102]: Bray, Tim (2017) *The JavaScript Object Notation (JSON) Data Interchange Format*. RFC 8259, STD 90. Available at: [https://www.rfc-editor.org/info/rfc8259/](https://www.rfc-editor.org/info/rfc8259/)[Accessed: 24 May 2026] -- The current JSON standard.
-[^103]: Crockford, Douglas (2006) *The application/json Media Type for JavaScript Object Notation (JSON)*. RFC 4627. Available at: [https://www.rfc-editor.org/info/rfc4627/](https://www.rfc-editor.org/info/rfc4627/) [Accessed: 24 May 2026] -- The first definition, an informational RFC, now obsolete, current standard is [].
-[^104]: ECMA International (2013) *ECMA-404: The JSON data interchange syntax*. 1st ed. Available at: [https://ecma-international.org/wp-content/uploads/ECMA-404_1st_edition_october_2013.pdf](https://ecma-international.org/wp-content/uploads/ECMA-404_1st_edition_october_2013.pdf) [Accessed: 24 May 2026] -- Now obsolete, the current standard is []. 
-[^105]: ECMA International (2017) *ECMA-404: The JSON data interchange syntax*. 2nd ed. Available at: [https://ecma-international.org/wp-content/uploads/ECMA-404_2nd_edition_december_2017.pdf](https://ecma-international.org/wp-content/uploads/ECMA-404_2nd_edition_december_2017.pdf) [Accessed: 24 May 2026] -- Describes only the allowed syntax, the more complete current standard is [].
-[^106]: International Organization for Standardization (2017) *ISO/IEC 21778:2017Information technology: the JSON data interchange syntax*. Available at: [https://www.iso.org/standard/71616.html](https://www.iso.org/standard/71616.html) [Accessed: 24 May 2026] -- Describes only the allowed syntax, the more complete current standard is [].
+- <a name= "bray-2017"></a>Bray, Tim (2017) *The JavaScript Object Notation (JSON) Data Interchange Format*. RFC 8259, STD 90. Available at: [https://www.rfc-editor.org/info/rfc8259/](https://www.rfc-editor.org/info/rfc8259/)[Accessed: 24 May 2026]
+
+  *The current JSON standard.*
+
+- <a name= "crockford-2006"></a>Crockford, Douglas (2006) *The application/json Media Type for JavaScript Object Notation (JSON)*. RFC 4627. Available at: [https://www.rfc-editor.org/info/rfc4627/](https://www.rfc-editor.org/info/rfc4627/) [Accessed: 24 May 2026] 
+
+  *The first definition, an informational RFC, now obsolete, current standard is [Bray, T., 2017](#bray-2017).*
+
+- <a name= "ecma404-1"></a>ECMA International (2013) *ECMA-404: The JSON data interchange syntax*. 1st ed. Available at: [https://ecma-international.org/wp-content/uploads/ECMA-404_1st_edition_october_2013.pdf](https://ecma-international.org/wp-content/uploads/ECMA-404_1st_edition_october_2013.pdf) [Accessed: 24 May 2026]
+
+  *Now obsolete, the current standard is [Bray, T., 2017](#bray-2017).* 
+
+- <a name= "ecma404-2"></a>ECMA International (2017) *ECMA-404: The JSON data interchange syntax*. 2nd ed. Available at: [https://ecma-international.org/wp-content/uploads/ECMA-404_2nd_edition_december_2017.pdf](https://ecma-international.org/wp-content/uploads/ECMA-404_2nd_edition_december_2017.pdf) [Accessed: 24 May 2026]
+
+  *Describes only the allowed syntax, the more complete current standard is [Bray, T., 2017](#bray-2017).*
+
+- <a name= "json-iso"></a>International Organization for Standardization (2017) *ISO/IEC 21778:2017Information technology: the JSON data interchange syntax*. Available at: [https://www.iso.org/standard/71616.html](https://www.iso.org/standard/71616.html) [Accessed: 24 May 2026]
+
+  *Describes only the allowed syntax, the more complete current standard is [Bray, T., 2017](#bray-2017).*
 
 **JSON Schema:**
 
-[^107]: *JSON Schema* (no date) Available at: [https://json-schema.org/](https://json-schema.org/) [Accessed: 24 May 2026]
+- *<a name="json-schema"></a>JSON Schema* (no date) Available at: [https://json-schema.org/](https://json-schema.org/) [Accessed: 24 May 2026]
 
-The most recent version of JSON Schema is 2020-12. JSON Schema is not a recognised standard (yet?), hence the version thing.
+The **most recent version** of JSON Schema is 2020-12. JSON Schema is not a recognised standard (yet?), hence the version thing.
 
-[^108]: *Draft 2020-12* (no date) Available at: [https://json-schema.org/draft/2020-12](https://json-schema.org/draft/2020-12) [Accessed: 24 May 2026] -- The landing page of the version on the JSON Schema website
-[^109]: Wright, Austin, Andrews, Henry and Hutton, Ben (2022): *JSON Schema Validation: A Vocabulary for Structural Validation of JSON*. Available at: [https://json-schema.org/draft/2020-12/draft-bhutton-json-schema-validation-01](https://json-schema.org/draft/2020-12/draft-bhutton-json-schema-validation-01) [Accessed: 24 May 2026] -- The actual specification document
+- *Draft 2020-12* (no date) Available at: [https://json-schema.org/draft/2020-12](https://json-schema.org/draft/2020-12) [Accessed: 24 May 2026]
 
-To get started with JSON Schema I found these pages useful:
+  *The landing page of the version on the JSON Schema website*
 
-[^110]: Creating your first schema (no date) Available at: [https://json-schema.org/learn/getting-started-step-by-step](https://json-schema.org/learn/getting-started-step-by-step) [Accessed: 24 May 2026]
-[^111]: *JSON Schema reference* (no date) Available at: [https://json-schema.org/understanding-json-schema/reference](https://json-schema.org/understanding-json-schema/reference) [Accessed: 24 May 2026]
-[^112]: 'JSON schemas and settings' (2026) in *Editing JSON with Visual Studio Code*. Available at: [https://code.visualstudio.com/docs/languages/json#_json-schemas-and-settings](https://code.visualstudio.com/docs/languages/json#_json-schemas-and-settings) [Accessed: 24 May 2026] -- Has information in how to configure VS Code to validate a JSON file against a specific JSON Schema file.
+- Wright, Austin, Andrews, Henry and Hutton, Ben (2022): *JSON Schema Validation: A Vocabulary for Structural Validation of JSON*. Available at: [https://json-schema.org/draft/2020-12/draft-bhutton-json-schema-validation-01](https://json-schema.org/draft/2020-12/draft-bhutton-json-schema-validation-01) [Accessed: 24 May 2026]
+
+  *The actual specification document*
+
+To **get started** with JSON Schema I found these pages useful:
+
+- Creating your first schema (no date) Available at: [https://json-schema.org/learn/getting-started-step-by-step](https://json-schema.org/learn/getting-started-step-by-step) [Accessed: 24 May 2026]
+
+- *JSON Schema reference* (no date) Available at: [https://json-schema.org/understanding-json-schema/reference](https://json-schema.org/understanding-json-schema/reference) [Accessed: 24 May 2026]
+
+- 'JSON schemas and settings' (2026) in *Editing JSON with Visual Studio Code*. Available at: [https://code.visualstudio.com/docs/languages/json#_json-schemas-and-settings](https://code.visualstudio.com/docs/languages/json#_json-schemas-and-settings) [Accessed: 24 May 2026]
+
+  *Has information in how to configure VS Code to validate a JSON file against a specific JSON Schema file.*
 
 Other sources I used when putting the workshop together:
 
-[^113]: Amazon Web Services (no date) *What’s the Difference Between JSON and XML?* Available at: [https://aws.amazon.com/compare/the-difference-between-json-xml/](https://aws.amazon.com/compare/the-difference-between-json-xml/) [Accessed: 24 May 2026]
-[^114]: Liquid Technologies (2025) *Understanding JSON: A Beginner’s Guide – Part 1 of 4*. Available at: [https://blog.liquid-technologies.com/understanding-json-a-beginners-guide-part-1-of-4](https://blog.liquid-technologies.com/understanding-json-a-beginners-guide-part-1-of-4) [Accessed: 24 May 2026]
+- <a name="aws"></a>Amazon Web Services (no date) *What’s the Difference Between JSON and XML?* Available at: [https://aws.amazon.com/compare/the-difference-between-json-xml/](https://aws.amazon.com/compare/the-difference-between-json-xml/) [Accessed: 24 May 2026]
+- <a name="liquidtech"></a>Liquid Technologies (2025) *Understanding JSON: A Beginner’s Guide – Part 1 of 4*. Available at: [https://blog.liquid-technologies.com/understanding-json-a-beginners-guide-part-1-of-4](https://blog.liquid-technologies.com/understanding-json-a-beginners-guide-part-1-of-4) [Accessed: 24 May 2026]
 
 ### Other sources
 
-[^115]: https://en.wikipedia.org/wiki/List_of_longest-living_cats
+- <a name="oldest-cats"></a>'List of longest-living cats' (2026) Available at: https://en.wikipedia.org/wiki/List_of_longest-living_cats [Accessed: 24 May 2026]
 
 ## Tools and software
 
@@ -1578,7 +1652,7 @@ Looking up **code points** for characters and how to represent them in various l
 
   *An extension/plugin to make working with JSON in Notepad++ easier. Recommend installing this via Notepad++ rather than downloading from GitHub, it's easier: Plugins → Plugins Admin → Search for "JSON Tools" → Tick the check box next to the name → Click "Install" (top right).*
 
-- <a name= "xml-tools"></a>morbac (2022) xmltools [Computer programme]. Available at: [https://github.com/morbac/xmltools](https://github.com/morbac/xmltools) [Accessed: 24 May 2026]
+- <a name= "xml-tools"></a>morbac (2022) *xmltools* [Computer programme]. Available at: [https://github.com/morbac/xmltools](https://github.com/morbac/xmltools) [Accessed: 24 May 2026]
 
   *An extension/plugin to make working with XML in Notepad++ easier. Recommend installing this via Notepad++ rather than downloading from GitHub, it's easier: Plugins → Plugins Admin → Search for "XML Tools" → Tick the check box next to the name → Click "Install" (top right).*
 
@@ -1587,3 +1661,34 @@ Looking up **code points** for characters and how to represent them in various l
 - <a name= "rainbow-csv"></a>mechatroner (2026) Rainbow CSV [Computer programme]. Available at: [https://marketplace.visualstudio.com/items?itemName=mechatroner.rainbow-csv](https://marketplace.visualstudio.com/items?itemName=mechatroner.rainbow-csv) [Accessed: 24 May 2026]
 
   *A Visual Studio Code extension that makes working with delimited files a lot easier.*
+  
+  
+
+[^1]: see [*Carriage Returns: A Comprehensive Guide to Carriage Returns, Line Breaks and CRLF*, 2025](#crlf1), [Meszaros, B., 2021](#crlf2) and [‘Newline’, 2026](#crlf3).
+[^2]: The information in this section has been, unless stated otherwise, compiled using the following sources: [‘Comma-separated values’, 2026](#csv-wikipedia), [‘Delimiter’, 2026](#delimiter)], [‘Delimiter-separated values’, 2026)](#dsv), [‘Tab-separated values’, 2026](#tsv), [‘Table (information)’, 2026](#table), [Shafranovich, Y., 2005](#Shafranovich-2005), [University of Minnesota Internet Gopher Tea, no date](#tsv-def), [Tennison, J., 2006](#Tennison-2016), [Tennison, J., Kellogg, G. & Herman, I., 2015](#Tennison-et-al-2015), 
+[^3]: [Shafranovich, Y., 2005](#Shafranovich-2005)
+[^4]: [Pollok, R., 2021](#Pollok-2021)
+[^5]: [CSV Format: History, Advantages and Why It Is Still Popular, no date](#bytescout)
+[^6]: ['Markup languages', 2026](#markup)
+[^7]: The information in this section has been, unless stated otherwise, compiled using the following sources: ['XML', 2026](#xml-wikidpedia), [*XML in 10 points*, 2014](#xml-in-10-points)
+[^8]: [*Extensible Markup Language (XML) 1.0*, 2008](#xml10)
+[^9]: [*Extensible Markup Language (XML) 1.1*, 2006](#xml11)
+[^10]: [*XML Core Working Group Public Page*, 2017](#xml-core-wg)
+[^11]: The information in this section has been, unless stated otherwise, compiled using the following sources: ['XML Tutorial', no date), [*Extensible Markup Language (XML) 1.0*, 2008](#xml10)](#xml-w3s), ['XML', 2026](#xml-wikidpedia)
+[^12]: The information in this section has been, unless stated otherwise, compiled using the following sources: ['DTD Tutorial', no date](#dtd-w3s), ['Document type definition', 2026](#dtd-wikipedia), [*Extensible Markup Language (XML) 1.0*, 2008](#xml10), ['XML DTD', no date](#dtd-w3s-2)
+[^13]: The information in this section has been, unless stated otherwise, compiled using the following sources: ['XML Schema Tutorial', no date](#xsd), ['XML Schema', no date](#xsd-w3s-2), ['XML Schema (W3C)', 2026](#xsd-wikipedia)
+[^14]: The information in this section has been, unless stated otherwise, compiled using the following sources: ['Namespace', 2026](#ns-wikipedia), [*Namespaces in XML 1.0*, 2009](#ns10), ['XML Namespace', 2025](#xmlns-wikipedia), ['XML Namespaces', no date](#ns-w3s)
+[^15]: The default namespace only works for elements. Namespaces for attributes work slightly differently. If you use an attribute that belong as per the schema to the respective element there is no need to prefix it, it is in this element's context. If you want to use an attribute from a different namespace though (as we e.g. do with `xsi:schemaLocation`) you need to prefix it. This [thread on StackOverflow](#mckamey-2019) has a good explanation of this.
+[^16]: The information in this section has been, unless stated otherwise, compiled using the following sources: ['XML Schema Tutorial', no date](#xsd-w3s), ['XML Schema', no date](#xsd-w3s-2), ['XML Schema (W3C)', 2026](#xsd-wikipedia)
+[^17]: What these two do goes much deeper than the scope of this lesson. If you want to know more see e.g. this [thread on StackOverflow](#kjhughes-2020).
+[^18]: [ECMA International, 2013](#ecma404-1) and the second edition [ECMA International, 2017](#ecma404-2)
+[^19]: [Bray, Tim, 2017](#bray-2017)
+[^20]: [International Organization for Standardization, 2017](#json-iso)
+[^21]: The information in this section has been, unless stated otherwise, compiled using the following sources: [Bray, Tim, 2017](#bray-2017), ['JavaScript JSON', no date](#json-w3s), ['JSON', 2026](#json-wikipedia)
+[^22]: [*JSON Schema*, no date](#json-schema)
+[^23]: There are some intricacies of which characters can be used for numbers and encoding bits for strings. None of which are terribly relevant for bibliographic use cases. See [Bray, Tim, 2017](#bray-2017). 
+[^24]: The information in this section has been, unless stated otherwise, compiled using the following sources: [Amazon Web Services, no date](#aws), [Liquid Technologies, 2025](#liquidtech)
+[^25]: ['List of longest-living cats', 2026](#oldest-cats)
+
+
+
