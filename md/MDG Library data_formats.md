@@ -1,8 +1,14 @@
 # MDG Library Carpentry Workshop, Birmingham, Aston University 5th and 12th June 2026, Day 1: Data formats
 
-To work with files in the formats discussed, work with a text editor that can do syntax highlighting and show invisible characters such as e.g. [Notepad++](https://notepad-plus-plus.org/)[^c], [Visual Studio Code](https://code.visualstudio.com/), [Sublime Text](https://www.sublimetext.com/) etc. They have a bit of a learning curve, but you'll save yourself a lot of headache!
+## Useful tools/setup
 
-**Notepad++** is a nice and easy one to get started with. The interface looks kind of familiar to office programmes. Plugins are available to make working with e.g. JSON and XML files easier.
+To work with files in the formats discussed, work with a **text editor that can do syntax highlighting** and show invisible characters such as e.g. [Notepad++](https://notepad-plus-plus.org/), [Visual Studio Code](https://code.visualstudio.com/), [Sublime Text](https://www.sublimetext.com/) etc. They have a bit of a learning curve, but you'll save yourself a lot of headache!
+
+**Notepad++** is a nice and easy one to get started with. The interface looks kind of familiar to office programmes. Plugins are available to make working with e.g. JSON and XML files easier. There are also a number of extensions to make your life easier:
+
+- [CSVLint](#csv-lint) for working with CSV files,
+- [XML Tools](#xml-tools) for working with XML files, and
+- [JSON Tools](#json-tools) for working with JSON files.
 
 **Visual Studio Code** (VS Code) is a lot more than just a text editor, you can use this as a development environment and run code from it. It has a terminal and debugging functionality. The learning curve is a bit steeper, the interface is less familiar if you come from the usual office apps and more is done via keyboard shortcuts or commands. There are lots of extensions and plugins, you can connect it to AI etc. You get the idea: it can do a lot and thus is more complex to learn.
 
@@ -1293,7 +1299,7 @@ If your use case doesn't dictate which format to use, how do you decide? There a
 | Validation             | Can be validated using XML Schema                         | Can be validated using JSON Schema                           |
 | Security               | Has some security concerns re DTDs, don't use them.       | Is safer than XML                                            |
 
-This might make it sound like JSON is always the better choice, but that's not true. If you need namespaces, data types JSON cannot support or very complex data structures, XML does the better job. 
+This might make it sound like JSON is always the better choice, but that's not true. If you need namespaces, data types JSON cannot support or very complex data structures, XML does the better job. [[1]](#implementation-data-types-and-structures-no-date)
 
 ## Footnotes
 
@@ -1307,29 +1313,29 @@ This might make it sound like JSON is always the better choice, but that's not t
 
 **BBC Bitesize** has some very gentle introductions to data types and structures that cover strings, integers, floats, doubles, Booleans and arrays:
 
-[^1]: 'Implementation: Data types and structures' (no date) *BBC Bitesize*. Available at: [https://www.bbc.co.uk/bitesize/guides/zghbgk7](https://www.bbc.co.uk/bitesize/guides/zghbgk7) [Accessed: 24 May 2026]
-[^2]: 'Data types, structures and operators' (no date) *BBC Bitesize*. Available at: [https://www.bbc.co.uk/bitesize/guides/z788jty](https://www.bbc.co.uk/bitesize/guides/z788jty) [Accessed: 24 May 2026] -- The "Data types", "Arrays" and "Using operators" chapters are of interest for the topic. The other chapters are specifically geared towards VBA (Visual Basic) programming in Excel.
+- <a name="implementation-data-types-and-structures-no-date"></a>'Implementation: Data types and structures' (no date) *BBC Bitesize*. Available at: [https://www.bbc.co.uk/bitesize/guides/zghbgk7](https://www.bbc.co.uk/bitesize/guides/zghbgk7) [Accessed: 24 May 2026]
+- <a name= "data-types-structures-and-operators-no-date"></a>'Data types, structures and operators' (no date) *BBC Bitesize*. Available at: [https://www.bbc.co.uk/bitesize/guides/z788jty](https://www.bbc.co.uk/bitesize/guides/z788jty) [Accessed: 24 May 2026] -- *The "Data types", "Arrays" and "Using operators" chapters are of interest for the topic. The other chapters are specifically geared towards VBA (Visual Basic) programming in Excel.*
 
 Discussions of data types and structures are usually **specific to a programming language or application**. 
 
 **Wikipedia** articles on the various data types and structures are quite good at conveying both the basics and going into some detail for specific languages. Some of the detail is very deep though. The articles concerning the data types we discussed are:
 
-[^3]: ‘Array (data structure)’ (2026) *Wikipedia*. Available at: [https://en.wikipedia.org/wiki/Array_(data_structure)](https://en.wikipedia.org/wiki/Array_(data_structure)) [Accessed: 24 May 2026]
-[^4]: 'Array (data type)' (2026) *Wikipedia*. Available at: [https://en.wikipedia.org/wiki/Array_(data_type)](https://en.wikipedia.org/wiki/Array_(data_type)) [Accessed: 24 May 2026]
-[^5]: 'Boolean data type' (2026) *Wikipedia*. Available at: [https://en.wikipedia.org/wiki/Boolean_data_type](https://en.wikipedia.org/wiki/Boolean_data_type) [Accessed: 24 May 2026]
-[^6]: ‘Data structure’ (2026) *Wikipedia*. Available at: [https://en.wikipedia.org/wiki/Data_structure](https://en.wikipedia.org/wiki/Data_structure) [Accessed: 24 May 2026] -- This article has links to articles to other data structure mentioned but not discussed.
-[^7]: ‘Data type’ (2026) *Wikipedia*. Available at: [https://en.wikipedia.org/wiki/Data_type](https://en.wikipedia.org/wiki/Data_type) [Accessed: 24 May 2026]
-[^8]: ‘Hash table’ (2026) *Wikipedia*. Available at: [https://en.wikipedia.org/wiki/Hash_table](https://en.wikipedia.org/wiki/Hash_table) [Accessed: 24 May 2026]
-[^9]:'Integer' (2026) *Wikipedia*. Available at: [https://en.wikipedia.org/wiki/Integer](https://en.wikipedia.org/wiki/Integer) [Accessed: 24 May 2026]
-[^10]: ‘Integer (computer science)’ (2026) *Wikipedia*. Available at: [https://en.wikipedia.org/wiki/Integer_(computer_science)](https://en.wikipedia.org/wiki/Integer_(computer_science)) [Accessed: 24 May 2026]
-[^11]: 'Linked list' (2026) *Wikipedia*. Available at: [https://en.wikipedia.org/wiki/Linked_list](https://en.wikipedia.org/wiki/Linked_list) [Accessed: 24 May 2026]
-[^12]: 'List (abstract data type)' (2026) *Wikipedia*. Available at: [https://en.wikipedia.org/wiki/List_(abstract_data_type)](https://en.wikipedia.org/wiki/List_(abstract_data_type)) [Accessed: 24 May 2026]
-[^13]: 'Primitive data type' (2026) *Wikipedia*. Available at: [https://en.wikipedia.org/wiki/Primitive_data_type](https://en.wikipedia.org/wiki/Primitive_data_type) [Accessed: 24 May 2026]
-[^14]:'String (computer science)' (2026) *Wikipedia*. Available at: [https://en.wikipedia.org/wiki/String_(computer_science)](https://en.wikipedia.org/wiki/String_(computer_science)) [Accessed: 24 May 2026]
+- <a name= "array1"></a>‘Array (data structure)’ (2026) *Wikipedia*. Available at: [https://en.wikipedia.org/wiki/Array_(data_structure)](https://en.wikipedia.org/wiki/Array_(data_structure)) [Accessed: 24 May 2026]
+- <a name= "array2"></a>'Array (data type)' (2026) *Wikipedia*. Available at: [https://en.wikipedia.org/wiki/Array_(data_type)](https://en.wikipedia.org/wiki/Array_(data_type)) [Accessed: 24 May 2026]
+- <a name= "boolean"></a>'Boolean data type' (2026) Wikipedia. Available at: https://en.wikipedia.org/wiki/Boolean_data_type [Accessed: 24 May 2026]
+- <a name= "data-structure"></a>‘Data structure’ (2026) Wikipedia. Available at: https://en.wikipedia.org/wiki/Data_structure [Accessed: 24 May 2026] -- *This article has links to articles to other data structure mentioned but not discussed.*
+- <a name= "data-type"></a>‘Data type’ (2026) Wikipedia. Available at: https://en.wikipedia.org/wiki/Data_type [Accessed: 24 May 2026]
+- <a name= "hash-table"></a>‘Hash table’ (2026) Wikipedia. Available at: https://en.wikipedia.org/wiki/Hash_table [Accessed: 24 May 2026]
+- <a name= "integer"></a>'Integer' (2026) Wikipedia. Available at: https://en.wikipedia.org/wiki/Integer [Accessed: 24 May 2026]
+- <a name= "integer1"></a>‘Integer (computer science)’ (2026) Wikipedia. Available at: https://en.wikipedia.org/wiki/Integer_(computer_science) [Accessed: 24 May 2026]
+- <a name= "linked-list"></a>'Linked list' (2026) Wikipedia. Available at: https://en.wikipedia.org/wiki/Linked_list [Accessed: 24 May 2026]
+- <a name= "list"></a>'List (abstract data type)' (2026) Wikipedia. Available at: https://en.wikipedia.org/wiki/List_(abstract_data_type) [Accessed: 24 May 2026]
+- <a name= "primitive-types"></a>'Primitive data type' (2026) Wikipedia. Available at: https://en.wikipedia.org/wiki/Primitive_data_type [Accessed: 24 May 2026]
+- <a name= "string"></a>'String (computer science)' (2026) Wikipedia. Available at: https://en.wikipedia.org/wiki/String_(computer_science) [Accessed: 24 May 2026]
 
-Finally, I found this article by Andrii Chornyi really useful to understand the difference between float and double:
+Finally, I found this article by Andrii Chornyi really useful to understand the difference between **float** and **double**:
 
-[^15]: Chornyi, Andrii (2024) ‘Float vs Double: a comprehensive guide’, *Codefinity blog*, August. Available at: https://codefinity.com/blog/Float-vs-Double [Accessed: 24 May 2026]
+- <a name= "chornyi-2024"></a>Chornyi, Andrii (2024) ‘Float vs Double: a comprehensive guide’, *Codefinity blog*, August. Available at: https://codefinity.com/blog/Float-vs-Double [Accessed: 24 May 2026]
 
 ### Data encoding
 
@@ -1522,24 +1528,24 @@ Other sources I used when putting the workshop together:
 
 Looking up **code points** for characters and how to represent them in various languages:
 
-[^a]: *Codepoints* (no date) Available at: [https://codepoints.net/](https://codepoints.net/) [Accessed: 24 May 2026]
+- <a name= "codepoints-tool"></a>*Codepoints* (no date) Available at: [https://codepoints.net/](https://codepoints.net/) [Accessed: 24 May 2026]
 
 **Converting** between all sorts of number formats:
 
-[^b]: *Number Converter* (no date) Available at: [https://www.rapidtables.com/convert/number/index.html](https://www.rapidtables.com/convert/number/index.html) [Accessed: 24 May 2026]
+- <a name= "number-converter-tool"></a>*Number Converter* (no date) Available at: [https://www.rapidtables.com/convert/number/index.html](https://www.rapidtables.com/convert/number/index.html) [Accessed: 24 May 2026]
 
 **Text editors** and extensions:
 
-[^c]: Ho, Don (2026) *Notepad++* [Computer programme]. Available at: [https://notepad-plus-plus.org/](https://notepad-plus-plus.org/) [Accessed: 24 May 2026] -- Easy entry-level text editor that is useful for working with data files.
-[^d]: Microsoft (2026) *Visual Studio Code* [Computer programme]. Available at: [https://code.visualstudio.com/](https://code.visualstudio.com/) [Accessed: 24 May 2026] -- Much more than a text editor, more of a development environment. Steeper learning curve than Notepad++.
-[^e]: Microsoft (2026) *Visual Studio Code* (browser version) [Computer programme]. Available at: [https://vscode.dev/](https://vscode.dev/) [Accessed: 24 May 2026] -- The in-browser version of Visual Studio Code.
-[^f]: Sublime HQ (2026) *Sublime Text* [Computer programme]. Available at: [https://www.sublimetext.com/](https://www.sublimetext.com/) [Accessed: 24 May 2026] -- Powerful text editor. The learning curve might be a bit steeper than Notepad++.
+- <a name= "ho-notepad++"></a>Ho, Don (2026) *Notepad++* [Computer programme]. Available at: [https://notepad-plus-plus.org/](https://notepad-plus-plus.org/) [Accessed: 24 May 2026] -- *Easy entry-level text editor that is useful for working with data files.*
+- <a name= "microsoft-vscode"></a>Microsoft (2026) *Visual Studio Code* [Computer programme]. Available at: [https://code.visualstudio.com/](https://code.visualstudio.com/) [Accessed: 24 May 2026] -- *Much more than a text editor, more of a development environment. Steeper learning curve than Notepad++.*
+- <a name= "microsoft-vscode-browser"></a>Microsoft (2026) *Visual Studio Code* (browser version) [Computer programme]. Available at: [https://vscode.dev/](https://vscode.dev/) [Accessed: 24 May 2026] -- The in-browser version of Visual Studio Code.
+- <a name= "sublime-text"></a>Sublime HQ (2026) *Sublime Text* [Computer programme]. Available at: [https://www.sublimetext.com/](https://www.sublimetext.com/) [Accessed: 24 May 2026] -- Powerful text editor. The learning curve might be a bit steeper than Notepad++.
 
 **Notepad++ extensions:**
 
-[^g]: BdR76 (2025) *CSVLint* [Computer programme]. Available at: [https://github.com/BdR76/CSVLint/](https://github.com/BdR76/CSVLint/) [Accessed: 24 May 2026] -- Makes working with CVS, other delimited files in Notepad++ easier. Recommend installing this via Notepad++ rather than downloading from GitHub, it's easier: Plugins → Plugins Admin → Search for "CSVLint" → Tick the check box next to the name → Click "Install" (top right).
-[^h]: molsonkiko (2026) *JsonToolsNppPlugin* [Computer programme]. Available at: [https://github.com/molsonkiko/JsonToolsNppPlugin](https://github.com/molsonkiko/JsonToolsNppPlugin) [Accessed: 24 May 2026] -- An extension/plugin to make working with JSON in Notepad++ easier. Recommend installing this via Notepad++ rather than downloading from GitHub, it's easier: Plugins → Plugins Admin → Search for "JSON Tools" → Tick the check box next to the name → Click "Install" (top right).
-[^i]: morbac (2022) xmltools [Computer programme]. Available at: [https://github.com/morbac/xmltools](https://github.com/morbac/xmltools) [Accessed: 24 May 2026] -- An extension/plugin to make working with XML in Notepad++ easier. Recommend installing this via Notepad++ rather than downloading from GitHub, it's easier: Plugins → Plugins Admin → Search for "XML Tools" → Tick the check box next to the name → Click "Install" (top right).
+- <a name= "csv-lint"></a>BdR76 (2025) *CSVLint* [Computer programme]. Available at: [https://github.com/BdR76/CSVLint/](https://github.com/BdR76/CSVLint/) [Accessed: 24 May 2026] -- *Makes working with CVS, other delimited files in Notepad++ easier. Recommend installing this via Notepad++ rather than downloading from GitHub, it's easier: Plugins → Plugins Admin → Search for "CSVLint" → Tick the check box next to the name → Click "Install" (top right).*
+- <a name= "json-tools"></a>molsonkiko (2026) *JsonToolsNppPlugin* [Computer programme]. Available at: [https://github.com/molsonkiko/JsonToolsNppPlugin](https://github.com/molsonkiko/JsonToolsNppPlugin) [Accessed: 24 May 2026] -- *An extension/plugin to make working with JSON in Notepad++ easier. Recommend installing this via Notepad++ rather than downloading from GitHub, it's easier: Plugins → Plugins Admin → Search for "JSON Tools" → Tick the check box next to the name → Click "Install" (top right).*
+- <a name= "xml-tools"></a>morbac (2022) xmltools [Computer programme]. Available at: [https://github.com/morbac/xmltools](https://github.com/morbac/xmltools) [Accessed: 24 May 2026] -- *An extension/plugin to make working with XML in Notepad++ easier. Recommend installing this via Notepad++ rather than downloading from GitHub, it's easier: Plugins → Plugins Admin → Search for "XML Tools" → Tick the check box next to the name → Click "Install" (top right).*
 
 **VS Code extensions:**
 
