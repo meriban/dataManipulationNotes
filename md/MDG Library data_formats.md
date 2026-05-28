@@ -32,9 +32,9 @@ Tabular data formats, like CSV and TSV, are **plain text** data formats that sto
 >
 > Text editors like Notepad++ and Visual Studio Code show you which newline character(s) are used in the file you have open and also let you change it. Look at the bottom right:
 >
-> ![image-20260517125303293](assets/notepad_newline.png)
+> ![image-20260517125303293](img/notepad_newline.png)
 >
-> ![image-20260517125522465](assets/vscode_newline.png)
+> ![image-20260517125522465](img/vscode_newline.png)
 >
 > Click or right-click on the respective area let's you change the newline character(s). 
 
@@ -46,13 +46,13 @@ Tabular data formats, like CSV and TSV, are **plain text** data formats that sto
 >
 > VS Code may as you if you want to install this the first time you open a CSV file in it. Just click the "Install" button.
 >
-> ![image-20260517130700950](assets/vscode_rainbowcsv.png)
+> ![image-20260517130700950](img/vscode_rainbowcsv.png)
 >
-> To install it otherwise click on the extensions button in the left side menu: ![image-20260517130332989](assets/vs_code_extensions.png)
+> To install it otherwise click on the extensions button in the left side menu: ![image-20260517130332989](img/vs_code_extensions.png)
 >
 > Type "rainbow csv" into the search bar and click the "Install" button.
 >
-> ![image-20260517131010671](assets/vscode_rainbowcsv_install.png)
+> ![image-20260517131010671](img/vscode_rainbowcsv_install.png)
 
 #### CSV basics
 
@@ -75,7 +75,7 @@ Id,name,age,breed,colour
 5,Pippin,2,Munchkin,white
 ```
 
-![image-20260524162534435](assets/vscode_cats1.png)
+![image-20260524162534435](img/vscode_cats1.png)
 
 **Each line**, or record, should **have the same number of column values (fields).**
 
@@ -88,7 +88,7 @@ Id,name,age,breed,colour
 1,Duncan,10,moggy,orange, white
 ```
 
-![image-20260517134404772](assets/vscode_cats2.png)
+![image-20260517134404772](img/vscode_cats2.png)
 
 We now have a mismatch between columns specified in the header and columns given for the first record. The table looks something like that now:
 
@@ -109,7 +109,7 @@ Id,name,age,breed,colour
 1,Duncan,10,moggy,"orange, white"
 ```
 
-![image-20260517134457085](assets/vscode_cats3.png)
+![image-20260517134457085](img/vscode_cats3.png)
 
 | ID   | name   | age  | breed | colour        |
 | ---- | ------ | ---- | ----- | ------------- |
@@ -143,7 +143,7 @@ Applying this to our demo data and adding some more fur colours in, we get:
 "5","Pippin","2","Munchkin","white, blue"
 ```
 
-![image-20260524162731190](assets/vscode_cats4.png)
+![image-20260524162731190](img/vscode_cats4.png)
 
 ### Advantages and disadvantages of tabular data
 
@@ -349,7 +349,7 @@ So, let's wrap all out cats into a `<cats>` element.
 
 What we have now is a **tree structure**. The various elements in it have **child** elements, **parent** elements or **sibling** elements.
 
-![](assets/cat_tree.png)
+![](img/cat_tree.png)
 
 #### XML prolog
 
