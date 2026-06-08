@@ -38,7 +38,7 @@ Depending on the language strings are either implemented as a primitive type or 
 
 An **`integer`** is a **full number** value. Examples are `0`, `20`, `1000`, `-50`. 
 
-The boundaries/range (i.e. how big/small the number can be) of the integer data type depends on the respective programming language. Many programming language make a distinction between `short` and `long` integers to save on storage space. The range of `short` is typically -32,768 to 32,767. `long` ranges are commonly, depending on the programming language, roughly either -2^31^ to 2^31^ or -2^63^ to 2^63^. 
+The boundaries/range (i.e. how big/small the number can be) of the integer data type depends on the respective programming language. Many programming language make a distinction between `short` and `long` integers to save on storage space. The range of `short` is typically -32,768 to 32,767. `long` ranges are commonly, depending on the programming language, roughly either -2<sup>31</sup> to 2<sup>31</sup> or -2<sup>63</sup> to 2<sup>63</sup>. 
 
 #### Float and double
 
@@ -75,15 +75,15 @@ An `array` is a collection of values in a **specific order**.
 
 Think of **each value** a sitting in its **own box**:
 
-![array1](G:\My Drive\docu\dataManipulationNotes\md\img\array1.png)
+![array1](img\array1.png)
 
 Each of these boxes is given an **index number**. Maybe somewhat counterintuitively the index numbering typically starts at `0` not at `1`. 
 
-![array2.png](G:\My Drive\docu\dataManipulationNotes\md\img\array2.png)
+![array2.png](img\array2.png)
 
 If you want to remove a value, let's say `f`, you end up with an empty box at index `5`:
 
-![array3.png](G:\My Drive\docu\dataManipulationNotes\md\img\array3.png)
+![array3.png](img\array3.png)
 
 To "close" the gap you would need to move all succeeding letters by one box to the left, which also means the values would change index number (e.g. take `g` out of the box at index `6` and put it into the box at index `5` etc.). That can be very expensive operation to do.
 
@@ -173,7 +173,7 @@ So, how does this happen? It's all down to encoding and decoding mix-ups.
 
 **code**  /kəʊd/, *noun*
 
-- A **method of communication** in which each **letter** (or group of letters) in a written message is systematically **substituted** by another, or by a symbol, to **enable transmission**
+- A **method of communication** in which each **letter** (or group of letters) in a written message is systematically **substituted** by another, or by a symbol, to **enable transmission**[^40]
 - Computing*. Any **system of symbols and rules** for **expressing information** or instructions in a form **usable by a computer** or other digital machine for **processing** or **transmitting information**. Also: information or instructions written according to such a system.
 
 **encode** /ɛnˈkəʊd/, *verb*
@@ -1707,7 +1707,7 @@ The Text Import Wizard also works for fixed-width data, i.e. data where the cont
 
 When opening a text file that contains delimited data Excel usually recognises that and selects the radio button for **"Delimited"** for you. 
 
-![image-20260607134520031](assets/excel_txt_import_wizard_1.png)
+![image-20260607134520031](img/excel_txt_import_wizard_1.png)
 
 The important bit in the first step if the Wizard is to check that Excel made the right call on **encoding** (usually it doesn't...). Check the value in the "File origin" drop down and adjust as needed. Most of the time you'll likely want this to say `65001 : Unicode (UTF-8)`. 
 
@@ -1835,10 +1835,10 @@ The **Wikipedia** articles on the subject all take you a lot deeper into the top
 
 Finally, some further sources I used to put the workshop together.
 
-- ‘code, n., sense II.4.b’ (2026) in *Oxford English Dictionary*. Available at: [https://doi.org/10.1093/OED/1750064856](https://doi.org/10.1093/OED/1750064856) [Accessed: 24 May 2026]
-- ‘code, n., sense II.7’ (2026) in *Oxford English Dictionary*. Available at: [https://doi.org/10.1093/OED/8027718018](https://doi.org/10.1093/OED/8027718018) [Accessed: 24 May 2026]
-- ‘decode, v.’ (2025) in *Oxford English Dictionary*. Available at: [https://doi.org/10.1093/OED/3318848028](https://doi.org/10.1093/OED/3318848028) [Accessed: 24 May 2026]
-- ‘encode, v.’ (2025) in *Oxford English Dictionary*. Available at: [https://doi.org/10.1093/OED/7215232060](https://doi.org/10.1093/OED/7215232060) [Accessed: 24 May 2026]
+- <a name="oed_code1"></a>‘code, n., sense II.4.b’ (2026) in *Oxford English Dictionary*. Available at: [https://doi.org/10.1093/OED/1750064856](https://doi.org/10.1093/OED/1750064856) [Accessed: 24 May 2026]
+- <a name="oed_code2"></a>‘code, n., sense II.7’ (2026) in *Oxford English Dictionary*. Available at: [https://doi.org/10.1093/OED/8027718018](https://doi.org/10.1093/OED/8027718018) [Accessed: 24 May 2026]
+- <a name="oed_decode"></a>‘decode, v.’ (2025) in *Oxford English Dictionary*. Available at: [https://doi.org/10.1093/OED/3318848028](https://doi.org/10.1093/OED/3318848028) [Accessed: 24 May 2026]
+- <a name="oed_encode"></a>‘encode, v.’ (2025) in *Oxford English Dictionary*. Available at: [https://doi.org/10.1093/OED/7215232060](https://doi.org/10.1093/OED/7215232060) [Accessed: 24 May 2026]
 - *FAQ* (no date) Available at: [https://home.unicode.org/basic-info/faq/](https://home.unicode.org/basic-info/faq/) [Accessed: 24 May 2026]
 - Library of Congress Network Development and MARC Standards Office (2000) *MARC 21 Specification for Record Structure, Character Sets, and Exchange Media*. Available at: [https://www.loc.gov/marc/specifications/spechome.html](https://www.loc.gov/marc/specifications/spechome.html) [Accessed: 24 May 2026]
 - MrAureliusR (2025) *ASCII-Table-wide.svg*. Available at: [https://commons.wikimedia.org/wiki/File:ASCII-Table-wide.svg](https://commons.wikimedia.org/wiki/File:ASCII-Table-wide.svg) [Accessed: 24 May 2026]
@@ -2147,3 +2147,7 @@ Looking up **code points** for characters and how to represent them in various l
 [^37]: The button for line/word wraps in Notepad++ is just to the left of the one toggling control character display. In VS Code you can use the keyboard shortcut `Alt + Z` or View → Word Wrap.
 [^38]: Remember the indexing in arrays? It starts with 0 rather than 1, hence the first character position in a MARC record  is 00.
 [^39]: You can safely rename .csv files to .txt. Windows will ask you if you are sure and warn that it might corrupt the file, but it won't, it's fine. If you can't see the file extension google how to make it visible for your file browser.
+[^40]: [‘code, n., sense II.4.b’ (2026)](#oed_code1)
+[^41]: [‘code, n., sense II.7’ (2026)](#oed_code2)
+[^42]: [‘decode, v.’ (2025)](#oed_decode)
+[^43]: [‘encode, v.’ (2025)](#oed_encode)
