@@ -1,6 +1,381 @@
-# MDG Library Carpentry Workshop, Birmingham, Aston University 5th and 12th June 2026, Day 1: Data formats
+# MDG Library Carpentry Workshop, Birmingham, Aston University 5th and 12th June 2026, Day 1: Data types, encoding and data formats
 
-## Useful tools/setup
+## Data types
+
+### What are data types?
+
+Data types essentially **categorise** data **values** into boxes based on:
+
+- how the value can be **manipulated** and which **operation** can be performed on it. E.g. if your value is a number you can add, subtract, divide, multiply etc., where as if the value is text none of those operations make sense, but replacing characters or inserting other words do.
+- **restrictions on the value itself**. E.g. to store a value for age, you might want to enforce that it is composed of numbers only and doesn't include any letters or punctuation. This restriction is called the data type's **range**. 
+
+The categorisation of a value as a specific data type also tells the computer how to **interpret** and **store** the value.
+
+This categorisation, assignment of possible operations and range and instruction on storage mean that:
+
+- **memory** and **storage** usage can be **optimised** (i.e. the value takes as little space as possible), and
+- **errors** can be **prevented** (e.g. by categorising "green" as a text, you can prevent a process from attempting to subtract from it).
+
+The **concrete definition/implementation** of each data type **depends** on the underlying **programming language**, but there are **generic** categories that are usually covered and whose implementation across languages are pretty similar.
+
+Broadly there are three categories of data types:
+
+- **primitive** data types: these are the building blocks that the next two categories are made from. It depends on the respective programming language what its primitive types are and how exactly they are defined. Most commonly they are various configurations of numbers, individual characters and Booleans.
+- **composite** data types or structures are the types that combine primitive data types into structures.
+- **user defined** data types are created by the programmer extending the built in primitive and/or composite data types.
+
+### Common data types
+
+#### Strings
+
+A **`string`** is a **text** value. It is a **sequence of characters** (letters, numbers, punctuation etc.).
+
+Examples would be `"Hello World!"`, `"user1"`, `"12345"`. The inverted commas are often used to enclose the string as a visual signal that the value is of type string.
+
+Depending on the language strings are either implemented as a primitive type or as a composite type consisting of the primitive character (`char`) type.
+
+#### Integer
+
+An **`integer`** is a **full number** value. Examples are `0`, `20`, `1000`, `-50`. 
+
+The boundaries/range (i.e. how big/small the number can be) of the integer data type depends on the respective programming language. Many programming language make a distinction between `short` and `long` integers to save on storage space. The range of `short` is typically -32,768 to 32,767. `long` ranges are commonly, depending on the programming language, roughly either -2^31^ to 2^31^ or -2^63^ to 2^63^. 
+
+#### Float and double
+
+The **`float`** and **`double`** data types cover **numbers** with **decimal points**, e.g. `2.5`, `3.5869`. 
+
+The difference is in how many decimal digits they can store:
+
+- `float` is less precise and can go to ~7 decimal digits. It therefore uses less storage space.
+- `double` can go to approximately 15 decimal digits and therefore uses more storage space.
+
+Some languages do not make a distinction between `float` and `double` and the data type is called `real`.
+
+#### Boolean
+
+A **Boolean** value can have two possible values, usually `true` or `false`. 
+
+### Common data structures
+
+Data structures are **composite data types** comprised of either primitive or other composite data types.
+
+Common ones are:
+
+- **array**
+- **list**
+- record or tuple[^26]  
+- **hash table or map**
+- stack[^27] and queue[^28]
+- graph[^29], and 
+- tree[^30]
+
+#### Arrays
+
+An `array` is a collection of values in a **specific order**.
+
+Think of **each value** a sitting in its **own box**:
+
+![array1](G:\My Drive\docu\dataManipulationNotes\md\img\array1.png)
+
+Each of these boxes is given an **index number**. Maybe somewhat counterintuitively the index numbering typically starts at `0` not at `1`. 
+
+![array2.png](G:\My Drive\docu\dataManipulationNotes\md\img\array2.png)
+
+If you want to remove a value, let's say `f`, you end up with an empty box at index `5`:
+
+![array3.png](G:\My Drive\docu\dataManipulationNotes\md\img\array3.png)
+
+To "close" the gap you would need to move all succeeding letters by one box to the left, which also means the values would change index number (e.g. take `g` out of the box at index `6` and put it into the box at index `5` etc.). That can be very expensive operation to do.
+
+Conversely, if you want to add a value between `c` and `d` you would need to move all values one box to the right and then add the new value to the box at index `3`.  What would happen to `i` though? Some array implementation will allow you to add another box at the end (i.e. the **length** of the array is **variable**), but others don't (i.e. the **length** of the array is **fixed**, once you created an array with 9 boxes, 9 boxes is the maximum it can contain). In that case, by adding a values between `c` and `d` you will have more values than boxes and get an error. 
+
+The **data type of the values** in the array must be the same in some implementations; other allow you to have values of different data types. 
+
+Typically arrays are **represented** by putting a **comma** between the values and enclosing the lot in square brackets, e.g.
+
+`["a", "b", "c", "d", "e", "f", "g", "h", "i"]` for the example above. All values in this array are strings.
+
+`[1, 5, 8, 10, 15, 67, 34]` is an example of an array of integers. This example also shows that values do not need to be in numerical or alphabetical order; the order is determined by the index of their box not the values themselves.
+
+`["Susi", "Fran", 15, 2.5, "Joe", -10, true]` is an example of an array with values of different data types. This is only possible if the concrete array implementation allows this.
+
+Finally, the **value** in a box can **be an array itself**:
+
+`[["a", "b", "c"], [1, 4, 3], [["left, "right"], ["top", "bottom"]]]`
+
+The example here is a one-dimensional array. Implementations for multi-dimensional arrays do also exist. In a two-dimensional array you need the index numbers of both dimensions to select at box and its value or assign the box a value. Think of a large egg tray: to locate a specific egg you need to know both its position length-wise (x-axis) and depth-wise (y-axis). In three-dimensional arrays you stack egg boxes on top of each other and now, to locate the egg you need three index values: length-wise (x-axis), depth-wise (y-axis) and height-wise (z-axis). 
+
+#### List or linked lists
+
+A linked list linear **collection** of **nodes**. A **node** is the actual **value** plus a **pointer** to the next node.
+
+![list1.png](img/list1.png)
+
+If you want to **remove** a node from the list there is no need to move other nodes around as well, just the pointer needs adjustment so it will point to another node:
+
+![list2.png](img/list2.png)
+
+**Inserting** another node works the same: modify the pointer of the preceding node to point to the new one and the pointer of the new node to the next one.
+
+There are also lists with pointers to both the next and the previous node; the are called doubly linked list. 
+
+#### Hash Map
+
+In hash maps **keys** are **mapped** to **values**. It is a collection of those **key-value-pairs**. The mapping is done via a so-called hash function.
+
+![list3.png](img/list3.png)
+
+In some implementations keys must be strings, others allow a wider range of data types to serve as keys. 
+
+Like in arrays the **value** of key-value-pair **can** itself **be another hash map**. 
+
+The most common representations of key value pairs separate the key and the value by `=` or `: `. E.g. the above could be represented as:
+
+```
+name=Izzy
+age=5
+breed=moggy
+```
+
+Or
+
+```
+"name" : "Izzy"
+"age": 5
+"breed": "moggy"
+```
+
+## Data encoding
+
+Knowing about data encoding matter because not understanding it can lead to mangled data such as
+
+```
+FriÃ°rikka RÃºnarsdÃ³ttir
+Â©2020
+fÃ¼nf sÃ¼ÃŸe FÃ¼chse
+ÐœÐµÑ‚Ð°Ð´Ð°Ð½Ð½Ñ‹Ðµ Ð¸Ð¼ÐµÑŽÑ‚ Ð·Ð½Ð°Ñ‡ÐµÐ½Ð¸Ðµ
+ë©”íƒ€ë°ì´í„°ê°€ ì¤‘ìš”í•©ë‹ˆë‹¤
+```
+
+instead of
+
+```
+Friðrikka Rúnarsdóttir
+©2020
+fünf süße Füchse
+Метаданные имеют значение
+메타데이터가 중요합니다
+```
+
+The term coined for this kind of mangled data is Mojibake.
+
+So, how does this happen? It's all down to encoding and decoding mix-ups.
+
+**code**  /kəʊd/, *noun*
+
+- A **method of communication** in which each **letter** (or group of letters) in a written message is systematically **substituted** by another, or by a symbol, to **enable transmission**
+- Computing*. Any **system of symbols and rules** for **expressing information** or instructions in a form **usable by a computer** or other digital machine for **processing** or **transmitting information**. Also: information or instructions written according to such a system.
+
+**encode** /ɛnˈkəʊd/, *verb*
+
+- to translate into cipher or code
+
+**decode** /(ˌ)diːˈkəʊd/, *verb*
+
+- to decipher or translate (a coded message)
+
+To store data on e.g. a hard disk what one sees as text or numbers on screen needs to be translated (**encoded**) into bits and bytes that can be stored on the disk. Vice versa when you open a document the bits and bytes it is stored in on the disk need to be **decoded** back into text or numbers that can be interpreted by a human.
+
+The mapping between the visual representation one sees on screen and the bit and byte sequences that represent the data on the storage medium is called a **character map**. The individual mappings are **code points**.
+
+The problem is that over time **many such maps have been developed** and they are often **not compatible** with each other. Thus if you encode a document using map A and then decode it using map B the result is often garbled nonsense. 
+
+### ASCII
+
+An well known early character map is ASCII (American Standard Code for Information Interchange), which was first published in 1963 and was revised multiple times until it reached its current form in 1986.
+
+ASCII contains **128 characters**, 95 if which are printable and 33 so called control characters that have no print representation (we'll come back to those in a bit).
+
+<a title="ASCII-Table.svg: ZZT32
+derivative work: YUFENG HUANG, Public domain, via Wikimedia Commons" href="https://commons.wikimedia.org/wiki/File:ASCII-Table-wide.svg"><img width="960" alt="Full ASCII table showing decimal, hexidecimal, and character equivalents" src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/1b/ASCII-Table-wide.svg/960px-ASCII-Table-wide.svg.png"></a>
+
+Each entry (code point) in this representation of the ASCII table has three columns: 
+
+- the decimal number of the code point (blue)
+- the hexadecimal[^31] equivalent (red)
+- the visual representation of the code point (green). Code points 0-32 and 127 are [non-printing control characters](#non-printing-control-characters) which do not have a visual representation as such, hence the visual representation column contains a description instead.
+
+For the English language the letters, numbers and punctuation included in ASCII is largely sufficient, but for pretty much every other language it is not suitable. There are diacritics missing and alphabets other than the basic Latin one are not included. To fill these gaps character maps containing other alphabets, diacritics etc. were developed. In the end the mess got bad though as without knowing which map had been used to encode it is impossible to decode correctly and there were so many of them. The solution: yet another character map that contains all letters, numbers, punctuation, symbols etc. for all alphabets and languages. A universal map. Enter **Unicode**.
+
+### Unicode
+
+The **Unicode** character map is **huge**. As of 2026 is contains close to **160,000 characters** covering 172 living and ancient scripts as well as number, punctuation, symbols, emojis, geometric shapes etc. It is no where near full yet either: it can accommodate approximately 1.1 million characters, so there's a lot of space for expansion.
+
+Unicode code point numbers are usually expressed in hexadecimal[^31] rather than decimal. The Japanese Hiragana letter は for example has code point decimal 12,399 which is 306F in hexadecimal and the ant emoji 🐜 is code point decimal 128,028 or 1F41C in hexadecimal. 
+
+What is different about Unicode than other character maps is that though it defines code points, i.e. gives every letter, number etc. a number that represents it, it is **not** at the same time also **an encoding scheme**. Unicode can be **encoded in three different schemes**: **UTF-8**, **UTF-16** and **UTF-32**. 
+
+The difference between them is in how much space they use to store each code point. 
+
+#### Little excursion into bits and bytes
+
+Ultimately any data stored on a disk is stored in a sequence of 0s and 1s, i.e. binary. 
+
+A **bit** is the most basic unit of digital data size. A bit can either be 1 or 0. A sequence of 8 bits is called a **byte**. There are 256 different forms the sequence of 0s and 1s in a byte can take; from `00000000` to `11111111`. Looking at `00000000` as a binary number it is the equivalent to the decimal 0, whereas `11111111` equals 255 in the decimal number system (0-255 = 256 numbers).
+
+Encoding schemes like ASCII map directly from their code point numbers to bytes:
+
+`a` = `97` = `01100001`
+
+Translating code point numbers bigger than 255 like this will need more than one byte. Encoding code point 12,399, the Unicode code point for the Japanese Hiragana letter は, like this would take two bytes: the binary equivalent of 12,399 is 11000001101111, which doesn't fit into the 8 bits of a byte. It also doesn't quite fill two bytes as its 14 characters long, but we want a nice distinction as to where one character ends and another begins to lets add two 0s at the start, which makes it 16 bits long and still means the same thing:
+
+`00110000` `01101111`
+
+Doing the same with Unicode code point 128,028, the ant emoji 🐜 will need 3 bytes:
+
+`00000001` `11100000` `10010100`
+
+This becoming quite hard to read. Enter hexadecimal[^31] and the nibble:
+
+A **nibble** is a block of 4 bits or half a byte. The possible sequences of 0s and 1s in a nibble are 16. Hexadecimal is a base 16 number system with 16 digits: 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, A, B, C, D, E and F. So, with one nibble we can encode each of those 16 hexadecimal digits. And using two digit hexadecimals we can express all 256 possible sequences of a byte.
+
+Thus in hexadecimal code point 97 representing `a` becomes hexadecimal `61`. That's easier to read for a human than the binary `01100001`. 
+
+The Hiragana letter `は` with code point 12,399 becomes `306F` in hexadecimal. Again much easier to read than `00110000` `01101111`.
+
+And for 🐜 with code point 128,028 we get `1F41C` in hexadecimal. Much easier to read and work with for a human than `00000001` `11100000` `10010100`. 
+
+To make the byte boundaries even clearer lets add a space between each two digit hexadecimal:
+
+`a` = `61`
+
+`は` = `30 6F`
+
+`🐜` = `01 F4 1C`
+
+This is why **Unicode code points** are usually **expressed** using **hexadecimals**. Hexadecimal provides a **concise** and **human-friendlier** way to **represent binary data** without losing the byte structure. It's an ideal **bridge** between **computer architecture** and what **humans** can understand and comprehend.
+
+The Unicode code point expression for our 3 example characters are
+
+`a` → U+0061
+
+`は` → U+306F
+
+`🐜` → U+1F41C
+
+#### Returning to Unicode
+
+OK, let's come back to the three encoding schemes for Unicode: UTF-8, UTF-16 and UTF-32. 
+
+**UTF-8** encoding varies how many bytes is uses for each character depending on how few it can get away with. So it can tell how many bytes were used when decoding it again certain patterns are used that ensure character boundaries can be recognised:
+
+- for code points 0-127 (hex 0000-007F) it can get away with 1 byte, leaving the first bit of it as 0 as marker that this is a one byte encoding (`0xxxxxxx`). And yes these 128 code points overlap exactly with ASCII, which is why UTF-8 is ASCII compatible.
+- for code points 128-2047 (hex 0080-07FF) it needs 2 bytes, the pattern is `110xxxxx` `10xxxxxx`,
+- for code points 2048-65,535 (hex 0800-FFFF) 3 bytes are needed with the pattern `110xxxxx` `10xxxxxx` `10xxxxxx`,
+- all higher code points (hex 10000-10FFF) need 4 bytes with the pattern `110xxxxx` `10xxxxxx` `10xxxxxx` `10xxxxxx`.
+
+Because of the prefix bits the hex representation of the bytes when more than one byte is used does not match the hex representation of the code point number.
+
+**UTF-16** encoding will always use either **2** bytes or **4** bytes to encode a character. When 4 bytes are needed things get complicated and as with UTF-8 the hex representation of the bytes and hex representation of the code point number diverge.
+
+**UTF-32** encoding uses **4** bytes for each character. No divergence here. The hex representation of the bytes and hex representation of the code point number are always the same.
+
+So, for our three example code points that means:
+
+|  | `a`           | `は` | `🐜` |
+|---|---|---|---|
+|**Code point**| U+0061 | U+306F | U+1F41C |
+|**UTF-8** encoding| `41` | `E3 81 AF` | `F0 9F 90 9C` |
+|**UTF-16** encoding| `00 41` | `30 6F` | `D8 3D DC 1C` |
+|**UTF-32** encoding| `00 00 00 41` | `00 00 30 6F` | `00 01 F4 1C` |
+
+[codepoints.net](https://codepoints.net/) is a useful site to find how to express a Unicode character in each encoding scheme as well as all sorts of other circumstances, programming languages or is codepoint.net
+
+#### Which Unicode encoding scheme to use?
+
+**Generally, UTF-8 is the best choice**. It is usually used for web pages and due to its variable length means that English text takes a lot less storage space than in the other encodings. It's also useful for older documents that use ASCII as it is compatible to it, while UTF-16 and UTF-32 are not. UTF-8 is the de-facto standard for the web and most modern programming languages.
+
+**UTF-16** is more space efficient for many **Asian character sets**. As can be seen in the table above due to the indexing bytes UTF-8 uses it actually needs more storage space for those characters than UTF-16 does.
+
+Finally, UTF-32 is only useful for specialised text processing and quick indexing. Because every character is using the same number of bytes it's possible to calculate string lengths and jump to index position without having to scan through everything character by character first. The trade-off is that for text that uses mostly basic Latin characters it takes four time more storage space than UTF-8. 
+
+### Encoding in action
+
+#### Excel
+
+When importing data into Excel choosing the right encoding on import avoids character mangling. Excel has a habit of trying to guess the correct encoding and getting it wrong. In my experience it especially likes to use Windows-1252, or ANSI where UTF-8 is needed. It's always worth checking, and if needed changing, the choice Excel makes.
+
+#### MarcEdit
+
+If you work with MarcEdit, you might have seen the "Character Encoding Options" in the MARC Tools window:
+
+![marcedit_encoding1.png](img/marcedit_encoding1.png)
+
+The **default character encoding** drop down should contain the **character set** your **source file** uses. You can then choose to get this translated into MARC-8[^32] or UTF-8. It's not always easy to know the encoding scheme of the source file, so some experimentation may be required. I generally try to end up with UTF-8 encoded files unless the use case specifically needs MARC-8 (highly unlikely). 
+
+If you get mangled characters where diacritics or special characters such as © are expected after using MARC Tools the reason will be that the "Default Character Encoding" setting was wrong for your file. 
+
+### Non-printing control characters
+
+Non-printing control characters are characters that have **no visual representation**. They cause effects such as starting a new line of text. 
+
+Though they do not have a visual representation as such there are techniques to display them[^36]. Examples of this are:
+
+- up to three, sometimes small caps, **capital letters**, e.g. LF for Line Feed (code point 10 in ASCII and Unicode) and CR for Carriage Return (code point 13 in ASCII and Unicode)[^35]. The "Enter" key on your keyboard will produce these two characters together on Windows [^34]. The "tab" key (often marked with ⇥ or ↹) inserts code point 9 TAB. 
+- using an **escape sequence**, i.e. a character prepended by an escape character that marks the character as having a special meaning. Common escape characters are `\` (black slash) and `&`. Sometimes the escape control characters (ESC, code point 27 in ASCII and Unicode) is used. e.g. Line Feed is commonly expressed as `\n`, Carriage Return as `\r` and Tab as `\t`.
+
+#### Control characters in MARC (and a little excursion into the anatomy of a MARC record)
+
+Mark makes use of control characters to set indicators and control field values to blank (yes SPACE (code point 32), is a control character) and to separate fields, subfields and records from one another. This is only visible if one looks at the record in raw MARC though, you can't see it in the mnemonic format used for data entry and manipulation. Once you have a .mrc (i.e. a raw MARC field to work with), open it in e.g. Notepad++ or Visual Studio Code and switch the display of control characters on[^36]. You might also want to enable line wraps[^37]. If you've never seen a raw MARC record before what you see will look kind of familiar and alien at the same time and look something like this:
+
+![Raw MARC display of two MARC21 records](img/raw_mark1.png)
+
+These are two raw MARC records with control characters showing.
+
+A raw MARC record as three parts:
+
+1. The **LEADER**: that's the first 24 characters (character positions 00-23[^38]) and these might look familiar as the LEADER is usually displayed in the mnemonic format as well: `01267cam a2200229 a 4500`
+
+2. The **DIRECTORY**: that's a part you never get to see in mnemonic format; ranging from the 25th character (character position 24) to the first occurrence of RS. It contains all the tag numbers, how long each tag is and where in the record it starts. You may have noticed that the tags are missing from the vaguely familiar looking rest of the record. That is because they are stored here in groups of 12 characters. Those 12 characters are split into three sections:
+
+   - character positions 00-02 (i.e. the first three characters) are the **tag**
+   - character positions 03-06 contain the **field length**. (Ever come up against an error telling you that a field exceeded 9999 characters? Here's the reason: 9999 is the maximum length that can be expressed in 4 characters.)
+   - character positions 07-11 is the **index** of the **start character** of the field in the variable field section of the record. (Another error you might have seen: a MARC record can at maximum be 99,999 characters long and here is the reason: index 99,999 is the maximum that can be expressed in 5 characters.)
+
+   For the first record in the example above we have `001001800000005001700018008004100035035001200076035002500088035026100113082001900374094002100393100013400414245011300548260003800661300000900699500002400708599006500732600011500797651009300912693003201005`. Broken down that gives us:
+
+   ```
+   | TAG | LENGTH | START INDEX |
+   |-----|--------|-------------|
+   | 001 | 0018   | 00000		 |
+   | 005 | 0017   | 00018		 |
+   | 008 | 0041   | 00035		 |
+   | 035 | 0012   | 00076		 |
+   | 035 | 0025   | 00088		 |
+   | 035 | 0261   | 00113		 |
+   | 082 | 0019   | 00374		 |
+   | 094 | 0021   | 00393		 |
+   | 100 | 0134   | 00414		 |
+   | 245 | 0113   | 00548		 |
+   | 260 | 0038   | 00661		 |
+   | 300 | 0009   | 00699		 |
+   | 500 | 0024   | 00708		 |
+   | 599 | 0065   | 00732		 |
+   | 600 | 0115   | 00797		 |
+   | 651 | 0093   | 00912		 |
+   | 693 | 0032   | 01005		 |
+   ```
+
+3. The **VARIABLE FIELD** values (including subfield codes). This is where the majority of control characters are used:
+
+   - **RS** (Record Separator, code point 31 or 1E in hex) is used to separate the directory from the variable field and the variable fields from each other. Both the directory and each variable field end in RS.
+   - **US** (Unit Separator, code point 32 or 1F in hex) indicates the start of a subfield. The first character following it is the subfield code. This is the character that in Library Management Systems is often represented as `|`, `$` or `‡`. 
+
+   The two characters between RS and US are the indicators (not present for 001-008 as these are control fields that do not have indicators). 
+
+   - **GS** (Group Separator, code point 30 or 1D in hex) terminates the record.
+
+## Useful tools/setup to work with non-MARC data formats
 
 To work with files in the formats discussed, work with a **text editor that can do syntax highlighting** and show invisible characters such as e.g. [Notepad++](https://notepad-plus-plus.org/), [Visual Studio Code](https://code.visualstudio.com/), [Sublime Text](https://www.sublimetext.com/) etc. They have a bit of a learning curve, but you'll save yourself a lot of headache!
 
@@ -24,11 +399,13 @@ Tabular data formats, like CSV and TSV, are **plain text** data formats that sto
 
 **TSV** for **T**ab-**S**eparated **V**alues, i.e. the used column delimiter is tab ⇥.
 
+<a name="newline-note"></a>
+
 > [!NOTE]
 >
 > **Newline character(s)**
 >
-> The character(s) used for **newline** depend(s) on your operating system. **Windows** uses **CRLF** (carriage return and line feed), while Unix and Unix-like systems (e.g. **Linux** or **macOS**) use **LF** (line feed) only. You may run into problems if the newline character(s) in the file(s) your working with do not conform to what your operating system is expecting.[^1]
+> The character(s) used for **newline** depend(s) on your operating system. **Windows** uses **CRLF** (carriage return and line feed[^33][^35]), while Unix and Unix-like systems (e.g. **Linux** or **macOS**) use **LF** (line feed) only. You may run into problems if the newline character(s) in the file(s) your working with do not conform to what your operating system is expecting.[^1]
 >
 > Text editors like Notepad++ and Visual Studio Code show you which newline character(s) are used in the file you have open and also let you change it. Look at the bottom right:
 >
@@ -1301,7 +1678,72 @@ If your use case doesn't dictate which format to use, how do you decide? There a
 | Validation             | Can be validated using XML Schema                         | Can be validated using JSON Schema                           |
 | Security               | Has some security concerns re DTDs, don't use them.       | Is safer than XML                                            |
 
-This might make it sound like JSON is always the better choice, but that's not true. If you need namespaces, data types JSON cannot support or very complex data structures, XML does the better job. [[1]](#implementation-data-types-and-structures-no-date)
+This might make it sound like JSON is always the better choice, but that's not true. If you need namespaces, data types JSON cannot support or very complex data structures, XML does the better job.
+
+## Additional Excel content
+
+The majority of content covered in the afternoon session on data management and tidying in Excel is documented in the Library Carpentry lesson ["Tidy data for librarians"](https://librarycarpentry.github.io/lc-spreadsheets/index.html) (you can also find the exercise file and further reading there). However, we covered a couple things beyond:
+
+### Importing data to Excel
+
+There are multiple way to get data into Excel. The most straightforward one is simple opening the file using Excel. This works for text files, CSV and XML. For text files and CSV this way of importing does not add the data to Excel's data model, so if you need/want that go the proper import way described below.
+
+#### Open with Excel
+
+##### CSV
+
+Opening a CSV file using the **usual** comma **delimiter** and **quote character** with Excel will usually just work, no questions asked. Excel might make a wrong call on the encoding though, so if you want better control, either 
+
+- save the file as a .txt[^39], which makes Excel walk through the Text Import Wizard, or
+- use the proper data import way via the "Data" tab.
+
+If you have a file using **custom delimiters** save it as .txt to force Excel to use the Text Import Wizard, not as .csv, which will result in Excel just opening it, not recognising any commas and the content of each line end up in the same cell (or use the "Data" tab import options).
+
+------
+
+##### Text Import Wizard for .txt files
+
+The Text Import Wizard also works for fixed-width data, i.e. data where the content of each column is always the same length. 
+
+When opening a text file that contains delimited data Excel usually recognises that and selects the radio button for **"Delimited"** for you. 
+
+![image-20260607134520031](assets/excel_txt_import_wizard_1.png)
+
+The important bit in the first step if the Wizard is to check that Excel made the right call on **encoding** (usually it doesn't...). Check the value in the "File origin" drop down and adjust as needed. Most of the time you'll likely want this to say `65001 : Unicode (UTF-8)`. 
+
+You can also specify if you data has a **header** column and if any rows should be skipped.
+
+In the second step you specify your **delimiter** and **quote characters**:
+
+
+
+![image-20260607135243294](img/excel_txt_import_wizard_2.png)
+
+The most common delimiters have check boxes, but anything beyond that you need to enter after "Other". You can't use multi-character delimiters with Excel! The quote character is called "Text qualifier" in the Wizard.
+
+At this point all data will be treated as "General", i.e. Excel will make a guess on the data type. If you are happy with that you can skip step 3 and click "Finish", else you can assign data types to columns in Step 3 and also exclude columns from import.
+
+![image-20260607141035901](img/excel_txt_import_wizard_3.png)
+
+Click on the respective column in "Data preview" to select it and assign a data type. You can select several columns by holding down `Shift` as you select.
+
+------
+
+##### XML
+
+Excel will flatten the XML data so it can represent all nested values. This means that you will get several row per "record" if you have any nesting. 
+
+### Prevent stripping of leading zeros and application of scientific notation to long numbers
+
+In newer versions it will ask whether you actually want it to do that:
+
+![image-20260607140024646](img/excel_strip_zeros_dialog.png)
+
+Should you not see with dialog, maybe because you ticked the check box an suppressed notification at some point, or find it irritating you can bring it back or permanently change Excels behaviour in File → Options → Data → Automatic Data Conversion:
+
+![image-20260607140553602](assets/excel_automatic_data_conversion.png)
+
+You can also **prevent** it from the irritating habit of **converting very large numbers to scientific notation** and changing digits at the to zeros (e.g. for Alma MMS).
 
 ## Annotated bibliography and further reading
 
@@ -1690,5 +2132,18 @@ Looking up **code points** for characters and how to represent them in various l
 [^24]: The information in this section has been, unless stated otherwise, compiled using the following sources: [Amazon Web Services, no date](#aws), [Liquid Technologies, 2025](#liquidtech)
 [^25]: ['List of longest-living cats', 2026](#oldest-cats)
 
+[^26]: A collection of a fixed number of values in a fixed sequence.
+[^27]: A collection of values using the "last in first out" (LIFO) principle, i.e. values are added and removed at the same end. Imagine a stack of plates. Typically you would put the next plate on top and, if you need a plate, also take it from the top rather than pull the bottom one out.
+[^28]: A collection of values using the "first in first out" (FIFO) principle, i.e. values are added and removed at opposite ends. Just like in a (regularly functioning) queue e.g. for the bus, the first in the queue gets on the bus first, the last in the queue last. 
+[^29]: A collection of pairs of nodes. This is what Linked Data is based on.
+[^30]: A hierarchical structure; think organisational hierarchy diagrams or nested folder structures to visualise this.
 
-
+[^31]: The hexadecimal system is using base 16 instead of base 10 which the decimal numbering system we are used to uses. We do not have a single character symbol that would represent 10 or 13 though, so the most common representation is using 0-9 and then A-F to represent 10-15. E.g. decimal `12` expressed in hexadecimal is `C`; decimal `17` is `11` in hexadecimal and the equivalent of `31` decimal is `1F` hexadecimal. The "Hex Basics" section of the following tutorial is a reasonably gentle introduction to the concept of the hexadecimal system: [https://learn.sparkfun.com/tutorials/hexadecimal/all](https://learn.sparkfun.com/tutorials/hexadecimal/all). 
+[^32]: MARC-8 is a character set that is only used with MARC records and part of the MARC standard. If you can, using UTF-8 is preferable.
+[^33]: see [Non-printing control characters](#non-printing-control-characters)
+[^34]: see also the [note on newlines](#newline-note)
+[^35]: The function of Line Feed and Carriage Return is easier to visualise with a typewriter: To start a new line the paper needs to be moved up one line (that's the Line Feed) and carriage (the moving part at the top) needs to return to its start position (that's the Carriage Return).
+[^36]: In Notepad++ you can make control characters (as well as spaces) visible by toggling the `¶` button. In VS code especially showing Line Feed and Carriage Return is only possible with hacks. Other control characters can be shown by ticking "Render Control Characters" in View → Appearance.
+[^37]: The button for line/word wraps in Notepad++ is just to the left of the one toggling control character display. In VS Code you can use the keyboard shortcut `Alt + Z` or View → Word Wrap.
+[^38]: Remember the indexing in arrays? It starts with 0 rather than 1, hence the first character position in a MARC record  is 00.
+[^39]: You can safely rename .csv files to .txt. Windows will ask you if you are sure and warn that it might corrupt the file, but it won't, it's fine. If you can't see the file extension google how to make it visible for your file browser.
