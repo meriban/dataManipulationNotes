@@ -75,15 +75,15 @@ An `array` is a collection of values in a **specific order**.
 
 Think of **each value** a sitting in its **own box**:
 
-![array1](img\array1.png)
+![array1](img/array1.png)
 
 Each of these boxes is given an **index number**. Maybe somewhat counterintuitively the index numbering typically starts at `0` not at `1`. 
 
-![array2.png](img\array2.png)
+![array2.png](img/array2.png)
 
 If you want to remove a value, let's say `f`, you end up with an empty box at index `5`:
 
-![array3.png](img\array3.png)
+![array3.png](img/array3.png)
 
 To "close" the gap you would need to move all succeeding letters by one box to the left, which also means the values would change index number (e.g. take `g` out of the box at index `6` and put it into the box at index `5` etc.). That can be very expensive operation to do.
 
